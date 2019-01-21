@@ -109,4 +109,4 @@ custom:
     distributionFolder: dist
   customDomain:
     domainName: listman.d6er.com
-    certificateName: '*.listman.d6er.com'
+    certificateName: '*.d6er.com'
