@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+@import "../node_modules/bulma/sass/utilities/initial-variables.sass";
+
+$navbar-background-color: $white-ter;
+$box-background-color: $white-bis;
+$section-padding: 1rem 1rem;
+$section-padding-medium: 1rem 1rem;
+$section-padding-large: 1rem 1rem;
+$gap: 0;
+
+@import "../node_modules/bulma/bulma.sass";

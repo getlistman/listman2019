@@ -1,0 +1,99 @@
+{
+  "name": "todos",
+  "icon": "fas fa-clipboard-check",
+  "tabs": [
+    "detail",
+    "description",
+    "pictures"
+  ],
+  "fields": [
+    {
+      "name": "Title",
+      "field": "title",
+      "type": "text"
+    },
+    {
+      "name": "Account",
+      "field": "account",
+      "type": "text"
+    },
+    {
+      "name": "Tags",
+      "field": "tags",
+      "type": "array"
+    },
+    {
+      "name": "Updated",
+      "field": "updated",
+      "type": "datetime"
+    },
+    {
+      "name": "Created",
+      "field": "created",
+      "type": "datetime"
+    },
+    {
+      "name": "Picture",
+      "field": "picture",
+      "type": "image"
+    },
+    {
+      "name": "Status",
+      "field": "status",
+      "type": "select",
+      "values": [
+        "published",
+        "unpublished",
+        "draft",
+        "trash"
+      ]
+    }
+  ],
+  "defaultFilters": [
+    {
+      "name": "all",
+      "queries": [],
+      "sorting": [
+        {
+          "field": "updated",
+          "order": "desc"
+        },
+        {
+          "field": "title",
+          "order": "asc"
+        }
+      ],
+      "columns": [
+        "picture",
+        "title",
+        "account",
+        "status",
+        "updated"
+      ],
+      "drilldowns": [
+        "tags"
+      ]
+    },
+    {
+      "name": "account",
+      "queries": [],
+      "sorting": [
+        {
+          "field": "updated",
+          "order": "desc"
+        },
+        {
+          "field": "title",
+          "order": "asc"
+        }
+      ],
+      "columns": [
+        "picture",
+        "title",
+        "account",
+        "status",
+        "updated"
+      ]
+    }
+  ]
+}

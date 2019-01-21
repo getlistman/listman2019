@@ -1,0 +1,112 @@
+service: listman
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  websocketApiRouteSelectionExpression: $request.body.action
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "execute-api:ManageConnections"
+      Resource:
+        - "arn:aws:execute-api:*:*:**/@connections/*"
+
+functions:
+  index:
+    handler: src-server/handler.index
+    events:
+      - http:
+          method: GET
+          path: /{proxy+}
+      - http:
+          method: GET
+          path: /
+      - http:
+          method: POST
+          path: /api
+
+  oauthcallback:
+    handler: src-server/auth/google.callback
+    events:
+      - http:
+          method: GET
+          path: /auth/google/callback
+
+  websocket:
+    handler: src-server/handler.index
+    events:
+      - websocket:
+          routeKey: $connect
+      - websocket:
+          routeKey: $disconnect
+      - websocket:
+          routeKey: $default
+
+package:
+  exclude:
+    - node_modules/.cache/**
+    #- node_modules/aws-sdk/**
+    #- node_modules/@aws-amplify/core/node_modules/aws-sdk/**
+    - build/**
+    - .git/**
+    - "*.js.map"
+
+resources:
+  Resources:
+    ProxyBaseResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        ParentId:
+          Fn::GetAtt:
+            - ApiGatewayRestApi
+            - RootResourceId
+        PathPart: dist
+        RestApiId:
+          Ref: ApiGatewayRestApi
+    ProxyPathResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        ParentId:
+          Ref: ProxyBaseResource
+        PathPart: '{proxy+}'
+        RestApiId:
+          Ref: ApiGatewayRestApi
+    ProxyMethod:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        ResourceId:
+          Ref: ProxyPathResource
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        AuthorizationType: NONE
+        HttpMethod: GET
+        MethodResponses:
+          - StatusCode: 200
+        RequestParameters:
+          'method.request.path.proxy': true
+        Integration:
+          Type: HTTP_PROXY
+          IntegrationHttpMethod: GET
+          Uri: http://listman-s3-bucket.s3-website-us-east-1.amazonaws.com/{proxy}
+          RequestParameters:
+            'integration.request.path.proxy': 'method.request.path.proxy'
+          IntegrationResponses:
+            - StatusCode: 200
+
+plugins:
+  - serverless-offline
+  - serverless-finch
+  - serverless-domain-manager
+  - serverless-websockets-plugin
+
+custom:
+  serverless-offline:
+    resourceRoutes:
+      ProxyMethod:
+        Uri: 'http://localhost/dist/{proxy}'
+  client:
+    bucketName: listman-s3-bucket
+    distributionFolder: dist
+  customDomain:
+    domainName: listman.d6er.com
+    certificateName: '*.listman.d6er.com'

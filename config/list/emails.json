@@ -1,0 +1,175 @@
+{
+  "name": "emails",
+  "icon": "far fa-envelope",
+  "tabs": [
+    "detail",
+    "raw"
+  ],
+  "fields": [
+    {
+      "name": "Subject",
+      "field": "subject",
+      "type": "text"
+    },
+    {
+      "name": "To",
+      "field": "to",
+      "type": "text"
+    },
+    {
+      "name": "From",
+      "field": "from",
+      "type": "text"
+    },
+    {
+      "name": "Date",
+      "field": "date",
+      "type": "datetime"
+    },
+    {
+      "name": "Label",
+      "field": "labelIds",
+      "type": "array"
+    },
+    {
+      "name": "Headers",
+      "field": "headerNames",
+      "type": "array"
+    },
+    {
+      "name": "MIME Type",
+      "field": "payload.mimeType",
+      "type": "text"
+    },
+    {
+      "name": "History ID",
+      "field": "historyId",
+      "type": "text"
+    },
+    {
+      "name": "Account",
+      "field": "account",
+      "type": "text"
+    }
+  ],
+  "defaultFilters": [
+    {
+      "name": "Inbox",
+      "queries": [
+        {
+          "field": "labelIds",
+          "condition": "is equal to",
+          "value": "INBOX"
+        }
+      ],
+      "sorting": [
+        {
+          "field": "date",
+          "order": "desc"
+        }
+      ],
+      "columns": [
+        "from",
+        "subject",
+        "account",
+        "date"
+      ],
+      "drilldowns": [
+        "account",
+        "labelIds"
+      ]
+    },
+    {
+      "name": "Sent",
+      "queries": [
+        {
+          "field": "labelIds",
+          "condition": "is equal to",
+          "value": "SENT"
+        }
+      ],
+      "sorting": [
+        {
+          "field": "date",
+          "order": "desc"
+        }
+      ],
+      "columns": [
+        "from",
+        "subject",
+        "date"
+      ],
+      "drilldowns": [
+        "account"
+      ]
+    },
+    {
+      "name": "Unread",
+      "queries": [
+        {
+          "field": "labelIds",
+          "condition": "is equal to",
+          "value": "UNREAD"
+        }
+      ],
+      "sorting": [
+        {
+          "field": "date",
+          "order": "desc"
+        }
+      ],
+      "columns": [
+        "from",
+        "subject",
+        "date"
+      ],
+      "drilldowns": [
+        "account"
+      ]
+    },
+    {
+      "name": "Zero",
+      "queries": [
+        {
+          "field": "labelIds",
+          "condition": "is equal to",
+          "value": "Zero"
+        }
+      ],
+      "sorting": [
+        {
+          "field": "date",
+          "order": "desc"
+        }
+      ],
+      "columns": [
+        "from",
+        "subject",
+        "date"
+      ],
+      "drilldowns": [
+        "account"
+      ]
+    },
+    {
+      "name": "All Mail",
+      "queries": [],
+      "sorting": [
+        {
+          "field": "date",
+          "order": "desc"
+        }
+      ],
+      "columns": [
+        "from",
+        "subject",
+        "payload.mimeType",
+        "date"
+      ],
+      "drilldowns": [
+        "account",
+        "payload.mimeType"
+      ]
+    }
+  ]
+}

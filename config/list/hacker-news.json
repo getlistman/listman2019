@@ -1,0 +1,34 @@
+{
+  "name": "hacker-news",
+  "icon": "fab fa-hacker-news",
+  "tabs": [
+    "detail"
+  ],
+  "fields": [
+    {
+      "name": "title",
+      "type": "text"
+    },
+    {
+      "name": "score",
+      "type": "text"
+    }
+  ],
+  "defaultFilters": [
+    {
+      "name": "all",
+      "parent": "",
+      "foreach": "",
+      "queries": [],
+      "sorting": [
+        {
+          "field": "idx",
+          "order": "asc"
+        }
+      ],
+      "columns": [
+        "title", "score"
+      ]
+    }
+  ]
+}
