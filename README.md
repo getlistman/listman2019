@@ -39,6 +39,7 @@ Open http://localhost:3000/hello in browser.
 
 [Initialization]
 1. Create a hosted zone
+2. Create certificate via ACM
 2. sls create_domain
 3. amplify init / push
 4. Create "user_id" attribute in Cognito user pool

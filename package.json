@@ -54,12 +54,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/d6er/vue-ssr-serverless.git"
+    "url": "git+https://github.com/y15e/listman.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/d6er/vue-ssr-serverless/issues"
+    "url": "https://github.com/y15e/listman/issues"
   },
-  "homepage": "https://github.com/d6er/vue-ssr-serverless#readme"
+  "homepage": "https://github.com/y15e/listman#readme"
 }

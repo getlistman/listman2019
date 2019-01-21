@@ -4,7 +4,7 @@ const config = {
   
   websocket_url: {
     'localhost': 'ws://localhost:3000/api',
-    'sls.d6er.com': 'wss://ws.d6er.com/dev'
+    'listman.d6er.com': 'wss://ws.listman.d6er.com/dev'
   },
   
   lists: lists
