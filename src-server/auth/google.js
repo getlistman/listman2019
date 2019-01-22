@@ -23,6 +23,8 @@ const scopes = [
 
 const url = oauth2Client.generateAuthUrl({
   access_type: 'offline',
+  prompt: 'consent select_account',
+  //approval_prompt: 'force',
   scope: scopes
 })
 

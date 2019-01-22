@@ -67,7 +67,7 @@ async function callAPI (event) {
       
       // production
       const apiId = event.requestContext.apiId
-      const region = 'us-east-1'
+      const region = process.env.AWS_REGION
       const stage = event.requestContext.stage
 
       let wsClient = new AWS.ApiGatewayManagementApi({

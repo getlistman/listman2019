@@ -29,7 +29,7 @@ async function add (user_id, event) {
       _id: _id,
       user_id: user_id,
       api_id: event.requestContext.apiId,
-      region: 'us-east-1',
+      region: process.env.AWS_REGION,
       stage: event.requestContext.stage
     }
     
@@ -61,8 +61,6 @@ async function send (user_id, message) {
     // production
     const db = mongo.getConnection()
     const docs = await db.collection('websockets').find({ user_id: user_id }).toArray()
-    console.log('[DOCS]')
-    console.log(docs)
     
     const apiId = docs[0].api_id
     const region = docs[0].region
