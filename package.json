@@ -43,6 +43,7 @@
   },
   "scripts": {
     "deploy": "npm run build && npm run deploy:client && serverless deploy",
+    "deploy:prod": "npm run build && npm run deploy:client && serverless deploy --stage prod",
     "deploy:client": "serverless client deploy --no-confirm",
     "deploy:func": "npm run build && npm run deploy:client && serverless deploy function -f index",
     "build": "npm run build:server && npm run build:client",

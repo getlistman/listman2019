@@ -3,6 +3,7 @@ service: listman
 provider:
   name: aws
   runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'}
   websocketApiRouteSelectionExpression: $request.body.action
   iamRoleStatements:
     - Effect: Allow
@@ -110,3 +111,5 @@ custom:
   customDomain:
     domainName: listman.d6er.com
     certificateName: '*.d6er.com'
+    basePath: ''
+    stage: ${self:provider.stage}
