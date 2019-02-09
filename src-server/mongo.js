@@ -12,7 +12,8 @@ const actions = {
         resolve(db)
       } else {
         return MongoClient.connect(url, { useNewUrlParser: true }).then(client => {
-          db = client.db('test')
+          let dbName = process.env.IS_OFFLINE ? 'listman' : process.env.STAGE
+          db = client.db(dbName)
           resolve(db)
         })
       }

@@ -16,6 +16,8 @@ module.exports.index = async (event, context) => {
   
   // Logging
   console.log('[handler.js] event.isOffline: ' + event.isOffline)
+  console.log('[handler.js] stage: ' + event.requestContext.stage)
+  console.log('[handler.js] STAGE: ' + process.env.STAGE)
   if (coldStart) {
     console.log('[handler.js] COLD START path: ' + event.path)
   }
