@@ -13,22 +13,14 @@ const methods = {
     
     const user = await Auth.currentAuthenticatedUser()
     
-    console.log('updating user attr')
-    console.dir(user)
-      
     try {
       await Auth.updateUserAttributes(user, { 'custom:user_id': user_id.toString() })
     } catch (error) {
-      console.log('try catch')
       console.dir(error, {depth:null})
     }
     
-    console.log('copying filters')
-      
     await filter.copyDefaultFiltersAllLists({ user_id: user_id })
     
-    console.log('initialized')
-      
     return 'initialized user'
   },
   

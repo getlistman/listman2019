@@ -19,23 +19,24 @@ $ serverless offline start
 ```
 Open http://localhost:3000/hello in browser.
 
-# notes
+# Notes
 
 ## AWS Services
-- CloudFormation
-- API Gateway
-- Lambda
-- Cognito
-- Route53
-- S3
-- CloudWatch
-- CloudFront(?)
-- IAM
-- Certificate Manager
+
+* CloudFormation
+* API Gateway
+* Lambda
+* Cognito
+* Route53
+* S3
+* CloudWatch
+* CloudFront(?)
+* IAM
+* Certificate Manager
 
 [Other]
-- MongoDB
-- GoDaddy
+* MongoDB
+* GoDaddy
 
 ## Initialization
 
