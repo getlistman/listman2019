@@ -1,18 +1,18 @@
 {
     "master": {
         "awscloudformation": {
-            "AuthRoleName": "listman-20190127180929-authRole",
-            "UnauthRoleArn": "arn:aws:iam::504289346779:role/listman-20190127180929-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::504289346779:role/listman-20190127180929-authRole",
+            "AuthRoleName": "listman-20190323161507-authRole",
+            "UnauthRoleArn": "arn:aws:iam::504289346779:role/listman-20190323161507-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::504289346779:role/listman-20190323161507-authRole",
             "Region": "us-east-1",
-            "DeploymentBucketName": "listman-20190127180929-deployment",
-            "UnauthRoleName": "listman-20190127180929-unauthRole",
-            "StackName": "listman-20190127180929",
-            "StackId": "arn:aws:cloudformation:us-east-1:504289346779:stack/listman-20190127180929/412d4680-2213-11e9-aaa7-0e85eb8bafe8"
+            "DeploymentBucketName": "listman-20190323161507-deployment",
+            "UnauthRoleName": "listman-20190323161507-unauthRole",
+            "StackName": "listman-20190323161507",
+            "StackId": "arn:aws:cloudformation:us-east-1:504289346779:stack/listman-20190323161507/63eee2c0-4d3b-11e9-9279-0afcd132dcac"
         },
         "categories": {
             "auth": {
-                "cognito": {}
+                "listman": {}
             }
         }
     }

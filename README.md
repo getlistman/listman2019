@@ -21,7 +21,7 @@ Open http://localhost:3000/hello in browser.
 
 # notes
 
-[AWS Services]
+## AWS Services
 - CloudFormation
 - API Gateway
 - Lambda
@@ -37,12 +37,20 @@ Open http://localhost:3000/hello in browser.
 - MongoDB
 - GoDaddy
 
-[Initialization]
+## Initialization
+
 1. Create a hosted zone
 2. Create certificate via ACM
-2. sls create_domain
-3. amplify init / push
-4. Create "user_id" attribute in Cognito user pool
-5. npm run deploy
-6. Add CNAME record for HTTP and websocket
-7. Create a custom domain for websocket
+3. serverless create_domain
+4. amplify init
+5. amplify add auth
+6. amplify push
+7. Create "user_id" attribute in Cognito user pool
+8. npm run deploy:prod
+9. Add CNAME record for HTTP and websocket
+10. Create a custom domain for websocket
+
+## Delete application
+
+1. amplify delete
+2. serverless remove --stage prod

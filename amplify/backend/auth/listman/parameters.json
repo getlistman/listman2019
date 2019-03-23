@@ -2,11 +2,11 @@
     "identityPoolName": "listman_idpool",
     "allowUnauthenticatedIdentities": false,
     "thirdPartyAuth": false,
-    "lambdaLogPolicy": "cognito_lambda_log_policy",
-    "openIdLambdaRoleName": "cognito_openid_lambda_role",
-    "openIdRolePolicy": "cognito_openid_pass_role_policy",
-    "openIdLambdaIAMPolicy": "cognito_openid_lambda_iam_policy",
-    "openIdLogPolicy": "cognito_openid_lambda_log_policy",
+    "lambdaLogPolicy": "listman_lambda_log_policy",
+    "openIdLambdaRoleName": "listman_openid_lambda_role",
+    "openIdRolePolicy": "listman_openid_pass_role_policy",
+    "openIdLambdaIAMPolicy": "listman_openid_lambda_iam_policy",
+    "openIdLogPolicy": "listman_openid_lambda_log_policy",
     "userPoolName": "listman_userpool",
     "autoVerifiedAttributes": [
         "email"
@@ -15,9 +15,9 @@
     "mfaTypes": [
         "SMS Text Message"
     ],
-    "roleName": "cognito_sns-role",
-    "roleExternalId": "cognito_role_external_id",
-    "policyName": "cognito-sns-policy",
+    "roleName": "listman_sns-role",
+    "roleExternalId": "listman_role_external_id",
+    "policyName": "listman-sns-policy",
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
     "emailVerificationSubject": "Your verification code",
@@ -33,23 +33,26 @@
     "requiredAttributes": [
         "email"
     ],
-    "userpoolClientName": "cognito_app_client",
+    "userpoolClientName": "listman_app_client",
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "mfaLambdaRole": "cognito_totp_lambda_role",
-    "mfaLambdaLogPolicy": "cognito_totp_lambda_log_policy",
-    "mfaPassRolePolicy": "cognito_totp_pass_role_policy",
-    "mfaLambdaIAMPolicy": "cognito_totp_lambda_iam_policy",
-    "userpoolClientLambdaRole": "cognito_userpoolclient_lambda_role",
-    "userpoolClientLogPolicy": "cognito_userpoolclient_lambda_log_policy",
-    "userpoolClientLambdaPolicy": "cognito_userpoolclient_lambda_iam_policy",
-    "userpoolClientSetAttributes": false,
+    "mfaLambdaRole": "listman_totp_lambda_role",
+    "mfaLambdaLogPolicy": "listman_totp_lambda_log_policy",
+    "mfaPassRolePolicy": "listman_totp_pass_role_policy",
+    "mfaLambdaIAMPolicy": "listman_totp_lambda_iam_policy",
+    "userpoolClientLambdaRole": "listman_userpoolclient_lambda_role",
+    "userpoolClientLogPolicy": "listman_userpoolclient_lambda_log_policy",
+    "userpoolClientLambdaPolicy": "listman_userpoolclient_lambda_iam_policy",
+    "userpoolClientSetAttributes": true,
     "useDefault": "manual",
     "authSelections": "identityPoolAndUserPool",
-    "resourceName": "cognito",
+    "resourceName": "listman",
+    "userpoolClientWriteAttributes": [
+        "email"
+    ],
     "authRoleName": {
         "Ref": "AuthRoleName"
     },

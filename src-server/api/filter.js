@@ -91,7 +91,7 @@ const methods = {
     }).then(r => {
       return methods.fetchFilters({ user_id: user_id, listName: listName })
     }).catch(e => {
-      console.dir(e)
+	console.dir(e, {depth: null})
     })
   },
   
