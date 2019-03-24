@@ -156,7 +156,8 @@ export function createStore () {
       setItem (state, payload) {
         state.paging = payload.result.paging
         let list = state.lists.find(l => l.name == payload.callData.list)
-        Vue.set(list, 'items', [ payload.result.item ])
+        let index = list.items.findIndex(i => i._id == payload.result.item._id)
+        Vue.set(list.items, index, payload.result.item)
       },
       
       setFilters (state, payload) {
