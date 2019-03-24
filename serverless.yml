@@ -100,7 +100,6 @@ plugins:
   - serverless-offline
   - serverless-finch
   - serverless-domain-manager
-  - serverless-websockets-plugin
 
 custom:
   serverless-offline:
