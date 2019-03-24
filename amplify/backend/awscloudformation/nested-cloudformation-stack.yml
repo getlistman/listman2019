@@ -81,7 +81,7 @@
 		"authlistman": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/listman-20190323161507-deployment/amplify-cfn-templates/auth/listman-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/listman-20190324115934-deployment/amplify-cfn-templates/auth/listman-cloudformation-template.yml",
 				"Parameters": {
 					"identityPoolName": "listman_idpool",
 					"allowUnauthenticatedIdentities": false,
@@ -140,7 +140,7 @@
 							"Arn"
 						]
 					},
-					"env": "master"
+					"env": "dev"
 				}
 			}
 		}

@@ -15,5 +15,22 @@
                 "listman": {}
             }
         }
+    },
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "listman-20190324115934-authRole",
+            "UnauthRoleArn": "arn:aws:iam::504289346779:role/listman-20190324115934-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::504289346779:role/listman-20190324115934-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "listman-20190324115934-deployment",
+            "UnauthRoleName": "listman-20190324115934-unauthRole",
+            "StackName": "listman-20190324115934",
+            "StackId": "arn:aws:cloudformation:us-east-1:504289346779:stack/listman-20190324115934/dae95a90-4de0-11e9-abf2-0a515b01a4a4"
+        },
+        "categories": {
+            "auth": {
+                "listman": {}
+            }
+        }
     }
 }

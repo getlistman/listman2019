@@ -55,3 +55,10 @@ Open http://localhost:3000/hello in browser.
 
 1. amplify delete
 2. serverless remove --stage prod
+
+## Add a new amplify environment
+
+1. git checkout dev
+2. amplify env add
+   Ref: https://github.com/aws-amplify/amplify-cli/issues/1001
+   

@@ -51,7 +51,7 @@
     "build:client": "npx webpack --config build/webpack.client.config.js",
     "build:server": "npx webpack --config build/webpack.server.config.js",
     "build:css": "node-sass --omit-source-map-url sass/bulma.scss dist/bulma.css",
-    "offline": "serverless offline start --dontPrintOutput --skipCacheInvalidation",
+    "offline": "serverless offline start --dontPrintOutput --skipCacheInvalidation --stage prod",
     "logs": "serverless logs -f websocket -t"
   },
   "repository": {
