@@ -17,6 +17,14 @@
             <span>Save</span>
           </button>
         </div>
+        <div class="level-item">
+          <button @click="deleteItem" class="button is-info is-small">
+            <span class="icon is-small">
+              <i class="fa fa-trash-alt" aria-hidden="true"></i>
+            </span>
+            <span>Delete</span>
+          </button>
+        </div>
       </div>
       <div class="level-right">
         <div class="level-item">
@@ -135,6 +143,17 @@ export default {
     save () {
       let apiData = {
         action: 'saveItem',
+        list: this.$route.params.list,
+        item: this.item
+      }
+      this.$store.dispatch('callApi', apiData).then(r => {
+        this.$router.go(-1)
+      })
+    },
+    
+    deleteItem () {
+      let apiData = {
+	action: 'deleteItem',
         list: this.$route.params.list,
         item: this.item
       }
