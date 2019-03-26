@@ -252,6 +252,7 @@ export default {
     deleteItems() {
       let apiData = {
         action: 'deleteItems',
+        list: this.$route.params.list,
         item_ids: this.checkedItems
       }
       this.$store.dispatch('callApi', apiData)

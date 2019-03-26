@@ -42,8 +42,8 @@ async function callAPI (event) {
   } else if (event.requestContext.eventType == 'MESSAGE') {
     
     // MESSAGE
-    console.log('MESSAGE')
-    console.log(event)
+    //console.log('MESSAGE')
+    //console.log(event)
     const parsedBody = JSON.parse(event.body)
     const payload = parsedBody.data
     const api = require('./api/index.js')
@@ -57,8 +57,8 @@ async function callAPI (event) {
       
       console.log('websocket.js payload')
       console.log(payload)
-      console.log('websocket.js data')
-      console.log(data)
+      //console.log('websocket.js data')
+      //console.log(data)
       
       // offline
       return data

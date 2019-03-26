@@ -36,8 +36,6 @@ module.exports.index = async (event, context) => {
     } else if (event.requestContext.eventType == 'MESSAGE') {
       const wsResult = await websocket(event)
       if (event.isOffline) {
-        console.log('[handler.js wsResult]')
-        console.log(wsResult)
         return {
           statusCode: 200,
           headers: { "Content-Type": "text/html" },

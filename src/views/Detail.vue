@@ -153,9 +153,9 @@ export default {
     
     deleteItem () {
       let apiData = {
-	action: 'deleteItem',
+        action: 'deleteItem',
         list: this.$route.params.list,
-        item: this.item
+        item_id: this.item._id
       }
       this.$store.dispatch('callApi', apiData).then(r => {
         this.$router.go(-1)

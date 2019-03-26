@@ -33,7 +33,6 @@
           <div class="select is-fullwidth">
             <select v-model="item.account">
               <option v-for="account in $store.state.accounts">
-                {{ account.emails[0].value }}
               </option>
             </select>
           </div>

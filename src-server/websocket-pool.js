@@ -5,12 +5,6 @@ const sockets = [] // for offline use only
 
 async function add (user_id, event) {
   
-  console.log('websocket-pool add')
-  console.log('[EVENT]')
-  console.log(event)
-  console.log('[ENV]')
-  console.log(process.env)
-  
   if (event.isOffline) {
     
     // offline

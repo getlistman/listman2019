@@ -200,7 +200,7 @@ const methods = {
     } else {
       // new item
       return mongo.getNextId(coll).then(r => {
-        item._id = r.value.seq
+        item._id = r
         return db.collection(coll).insertOne(item)
       })
     }
@@ -228,8 +228,14 @@ const methods = {
     })
   },
   
-  deleteItems: ({ user_id, item_ids }) => {
-    return db.collection('items.' + user_id).deleteMany({ _id: { $in: item_ids } })
+  deleteItem: ({ user_id, list, item_id }) => {
+    let coll = list + '.' + user_id
+    return db.collection(coll).deleteOne({ _id: item_id })  
+  },
+  
+  deleteItems: ({ user_id, list, item_ids }) => {
+    let coll = list + '.' + user_id
+    return db.collection(coll).deleteMany({ _id: { $in: item_ids } })
   },
   
   uploadImage: ({ name, file }) => {

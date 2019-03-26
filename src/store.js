@@ -100,7 +100,7 @@ export function createStore () {
             commit('setItem', payload)
           }
           if (data.action == 'saveItem') {
-            commit('setNotification', 'Item been sent saved.')
+            commit('setNotification', 'Item has been saved.')
           }
           if (data.action == 'copyItems') {
             commit('setNotification', 'Copied.')

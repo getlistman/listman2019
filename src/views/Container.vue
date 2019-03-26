@@ -7,12 +7,12 @@
         <aside class="menu">
           <ul class="menu-list">
             <li>
-              <button class="button is-small is-fullwidth">
+              <router-link :to="createNew" class="button is-small is-fullwidth">
                 <span class="icon is-small">
                   <i class="fas fa-edit" aria-hidden="true"></i>
                 </span>
                 <span>Create</span>
-              </button>
+              </router-link>
             </li>
           </ul>
           <p class="menu-label">
@@ -61,6 +61,12 @@
 import { Auth } from 'aws-amplify'
 
 export default {
+  
+  computed: {
+    createNew () {
+      return '/' + this.$route.params.list + '/' + this.$route.params.filter.replace(/\//g, '%2F') + '/new/detail'
+    }
+  },
   
   methods: {
     
