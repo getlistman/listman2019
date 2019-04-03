@@ -6,7 +6,6 @@ provider:
   stage: ${opt:stage, 'dev'}
   environment:
     STAGE: ${opt:stage, 'dev'}
-  websocketApiRouteSelectionExpression: $request.body.action
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -38,12 +37,7 @@ functions:
   websocket:
     handler: src-server/handler.index
     events:
-      - websocket:
-          routeKey: $connect
-      - websocket:
-          routeKey: $disconnect
-      - websocket:
-          routeKey: $default
+      - websocket: $default
 
 package:
   exclude:

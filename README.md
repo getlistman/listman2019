@@ -42,9 +42,9 @@ Open http://localhost:3000/hello in browser.
 
 1. Create a hosted zone
 2. Create certificate via ACM
-3. serverless create_domain
+3. serverless create_domain (remove Godaddy entry before)
 4. amplify init
-5. amplify add auth
+5. amplify add auth (use customize flow)
 6. amplify push
 7. Create "user_id" attribute in Cognito user pool
 8. npm run deploy:prod
