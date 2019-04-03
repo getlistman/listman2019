@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"listman": {
+		"cognitob33b878b": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation"
 		}
