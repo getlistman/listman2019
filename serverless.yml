@@ -37,6 +37,8 @@ functions:
   websocket:
     handler: src-server/handler.index
     events:
+      - websocket: $connect
+      - websocket: $disconnect
       - websocket: $default
 
 package:
