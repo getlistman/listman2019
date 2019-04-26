@@ -39,11 +39,11 @@ functions:
     handler: src-server/handler.index
     events:
       - websocket:
-          routeKey: $connect
+          route: $connect
       - websocket:
-          routeKey: $disconnect
+          route: $disconnect
       - websocket:
-          routeKey: $default
+          route: $default
 
 package:
   exclude:
