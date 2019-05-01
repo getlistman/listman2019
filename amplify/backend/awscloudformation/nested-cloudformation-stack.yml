@@ -78,26 +78,25 @@
 				}
 			}
 		},
-		"authlistman": {
+		"authcognito": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/listman-20190324115934-deployment/amplify-cfn-templates/auth/listman-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/listman-master-20190501173903-deployment/amplify-cfn-templates/auth/cognito-cloudformation-template.yml",
 				"Parameters": {
 					"identityPoolName": "listman_idpool",
 					"allowUnauthenticatedIdentities": false,
-					"thirdPartyAuth": false,
-					"lambdaLogPolicy": "listman_lambda_log_policy",
-					"openIdLambdaRoleName": "listman_openid_lambda_role",
-					"openIdRolePolicy": "listman_openid_pass_role_policy",
-					"openIdLambdaIAMPolicy": "listman_openid_lambda_iam_policy",
-					"openIdLogPolicy": "listman_openid_lambda_log_policy",
+					"lambdaLogPolicy": "cognito_lambda_log_policy",
+					"openIdLambdaRoleName": "cognito_openid_lambda_role",
+					"openIdRolePolicy": "cognito_openid_pass_role_policy",
+					"openIdLambdaIAMPolicy": "cognito_openid_lambda_iam_policy",
+					"openIdLogPolicy": "cognito_openid_lambda_log_policy",
 					"userPoolName": "listman_userpool",
 					"autoVerifiedAttributes": "email",
 					"mfaConfiguration": "OFF",
 					"mfaTypes": "SMS Text Message",
-					"roleName": "listman_sns-role",
-					"roleExternalId": "listman_role_external_id",
-					"policyName": "listman-sns-policy",
+					"roleName": "cognito_sns-role",
+					"roleExternalId": "cognito_role_external_id",
+					"policyName": "cognito-sns-policy",
 					"smsAuthenticationMessage": "Your authentication code is {####}",
 					"smsVerificationMessage": "Your verification code is {####}",
 					"emailVerificationSubject": "Your verification code",
@@ -106,22 +105,24 @@
 					"passwordPolicyMinLength": 8,
 					"passwordPolicyCharacters": "Requires Lowercase,Requires Uppercase,Requires Numbers,Requires Symbols",
 					"requiredAttributes": "email",
-					"userpoolClientName": "listman_app_client",
+					"userpoolClientName": "cognito_app_client",
 					"userpoolClientGenerateSecret": true,
 					"userpoolClientRefreshTokenValidity": 30,
+					"userpoolClientWriteAttributes": "email",
 					"userpoolClientReadAttributes": "email",
-					"mfaLambdaRole": "listman_totp_lambda_role",
-					"mfaLambdaLogPolicy": "listman_totp_lambda_log_policy",
-					"mfaPassRolePolicy": "listman_totp_pass_role_policy",
-					"mfaLambdaIAMPolicy": "listman_totp_lambda_iam_policy",
-					"userpoolClientLambdaRole": "listman_userpoolclient_lambda_role",
-					"userpoolClientLogPolicy": "listman_userpoolclient_lambda_log_policy",
-					"userpoolClientLambdaPolicy": "listman_userpoolclient_lambda_iam_policy",
-					"userpoolClientSetAttributes": true,
+					"mfaLambdaRole": "cognito_totp_lambda_role",
+					"mfaLambdaLogPolicy": "cognito_totp_lambda_log_policy",
+					"mfaPassRolePolicy": "cognito_totp_pass_role_policy",
+					"mfaLambdaIAMPolicy": "cognito_totp_lambda_iam_policy",
+					"userpoolClientLambdaRole": "cognito_userpoolclient_lambda_role",
+					"userpoolClientLogPolicy": "cognito_userpoolclient_lambda_log_policy",
+					"userpoolClientLambdaPolicy": "cognito_userpoolclient_lambda_iam_policy",
+					"userpoolClientSetAttributes": false,
 					"useDefault": "manual",
 					"authSelections": "identityPoolAndUserPool",
-					"resourceName": "listman",
-					"userpoolClientWriteAttributes": "email",
+					"resourceName": "cognito",
+					"thirdPartyAuth": false,
+					"hostedUI": false,
 					"authRoleName": {
 						"Ref": "AuthRoleName"
 					},
@@ -140,7 +141,7 @@
 							"Arn"
 						]
 					},
-					"env": "dev"
+					"env": "master"
 				}
 			}
 		}

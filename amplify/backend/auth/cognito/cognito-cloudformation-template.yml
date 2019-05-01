@@ -18,9 +18,6 @@ Parameters:
               
   allowUnauthenticatedIdentities:
     Type: String
-            
-  thirdPartyAuth:
-    Type: String
           
   lambdaLogPolicy:
     Type: String
@@ -91,6 +88,9 @@ Parameters:
   userpoolClientRefreshTokenValidity:
     Type: Number
               
+  userpoolClientWriteAttributes:
+    Type: CommaDelimitedList
+            
   userpoolClientReadAttributes:
     Type: CommaDelimitedList
       
@@ -126,10 +126,13 @@ Parameters:
             
   resourceName:
     Type: String
-                  
-  userpoolClientWriteAttributes:
-    Type: CommaDelimitedList
-                                            
+              
+  thirdPartyAuth:
+    Type: String
+            
+  hostedUI:
+    Type: String
+                                                
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
 
@@ -169,8 +172,10 @@ Resources:
   # Created upon user selection
   # Depends on SNS Role for Arn if MFA is enabled
     Type: AWS::Cognito::UserPool
+    UpdateReplacePolicy: Retain
     Properties:
       UserPoolName: !If [ShouldNotCreateEnvResources, !Ref userPoolName, !Join ['',[!Ref userPoolName, '-', !Ref env]]]
+      
       Schema: 
         
         -
@@ -178,6 +183,7 @@ Resources:
           Required: true
           Mutable: true
         
+      
       
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
       
@@ -192,6 +198,7 @@ Resources:
           RequireNumbers: true
           RequireSymbols: true
           RequireUppercase: true
+          
       MfaConfiguration: !Ref mfaConfiguration
       SmsVerificationMessage: !Ref smsVerificationMessage
       SmsConfiguration: 
@@ -203,10 +210,7 @@ Resources:
   # Depends on UserPool for ID reference
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
-      ClientName: listman_app_clientWeb
-      
-      ReadAttributes: !Ref userpoolClientReadAttributes
-      WriteAttributes: !Ref userpoolClientWriteAttributes
+      ClientName: cognito_app_clientWeb
       
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
       UserPoolId: !Ref UserPool
@@ -217,9 +221,6 @@ Resources:
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
       ClientName: !Ref userpoolClientName
-      
-      ReadAttributes: !Ref userpoolClientReadAttributes
-      WriteAttributes: !Ref userpoolClientWriteAttributes
       
       GenerateSecret: !Ref userpoolClientGenerateSecret
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
@@ -267,12 +268,12 @@ Resources:
             - '       response.send(event, context, response.SUCCESS, {''appSecret'': res.UserPoolClient.ClientSecret});'   
             - '     })'
             - '     .catch((err) => {'
-            - '       response.send(event, context, response.FAILURE, {err});'
+            - '       response.send(event, context, response.FAILED, {err});'
             - '     });'
             - ' }'
             - '};'
       Handler: index.handler
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Timeout: '300'
       Role: !GetAtt 
         - UserPoolClientRole
@@ -328,6 +329,11 @@ Resources:
       userpoolId: !Ref UserPool
     DependsOn: UserPoolClientLogPolicy
   
+
+  
+  
+
+  
     
   # BEGIN IDENTITY POOL RESOURCES
   
@@ -375,6 +381,8 @@ Outputs :
     Value: !GetAtt IdentityPool.Name 
   
   
+  
+  
   UserPoolId:
     Value: !Ref 'UserPool'
     Description:  Id for the user pool
@@ -392,5 +400,6 @@ Outputs :
    
    
   
+   
    
   
