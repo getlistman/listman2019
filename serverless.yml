@@ -110,7 +110,7 @@ custom:
     bucketName: listman-s3-bucket
     distributionFolder: dist
   customDomain:
-    domainName: listman.d6er.com
-    certificateName: '*.d6er.com'
+    domainName: listman.y15e.io
+    certificateName: '*.y15e.io'
     basePath: ''
     stage: ${self:provider.stage}
