@@ -16,7 +16,7 @@ phases:
       - npm install
       - cd ../..
       - sam build
-      - sam package --s3-bucket listman --output-template-file output.yaml
+      - sam package --s3-bucket listman-s3-bucket --output-template-file output.yaml
       - sam deploy --template-file output.yaml --stack-name listman --capabilities CAPABILITY_IAM 
 
 
