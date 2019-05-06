@@ -156,7 +156,7 @@ Resources:
     Properties:
       Name: listman.y15e.io
       Type: A
-      HostedZoneName: y15e.io
+      HostedZoneName: y15e.io.
       AliasTarget:
         DNSName: !GetAtt ListmanDomain.DistributionDomainName
         HostedZoneId: !GetAtt ListmanDomain.DistributionHostedZoneId
