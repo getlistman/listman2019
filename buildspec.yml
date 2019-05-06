@@ -11,7 +11,7 @@ phases:
       - pip install --user aws-sam-cli
       - export PATH=$PATH:/root/.local/bin
       - sam --version
-      - npm i npm@latest -g
+      - npm i -g npm@latest webpack-cli
       - cd dependencies/nodejs
       - npm install
       - cd ../..
