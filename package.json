@@ -19,6 +19,14 @@
     "type": "git",
     "url": "git+https://github.com/y15e/listman.git"
   },
+  "files": [
+    "config",
+    "dist/vue-ssr-client-manifest.json",
+    "dist/vue-ssr-server-bundle.json",
+    "src/aws-exports.js",
+    "src/index.template.html",
+    "src-server"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
