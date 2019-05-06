@@ -142,7 +142,7 @@ Resources:
     Type: AWS::ApiGateway::DomainName
     Properties: 
       DomainName: listman.y15e.io
-      CertificateArn: arn:aws:acm:us-east-1:504289346779:certificate/1e94ab11-81a9-4e90-840f-6566e21ac964
+      CertificateArn: arn:aws:acm:us-east-1:504289346779:certificate/4cea6741-1746-4ed7-9426-de09231c1e35
 
   ListmanDomainMapping:
     Type: AWS::ApiGateway::BasePathMapping
