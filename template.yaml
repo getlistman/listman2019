@@ -155,7 +155,8 @@ Resources:
     Type: AWS::Route53::RecordSet
     Properties:
       Name: listman.y15e.io
-      AliasTarget: !Ref ListmanDomain
+      AliasTarget:
+        DNSName: !Sub ${ListmanDomain:distributionDomainName}
 
 # Cannot create a custom domain for websocket via cloudformation
 # https://forums.aws.amazon.com/thread.jspa?threadID=299771
