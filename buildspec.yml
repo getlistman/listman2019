@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+
+  install:
+    commands:
+      - pip install --upgrade pip
+      - pip install --upgrade awscli
+      - pip install --user aws-sam-cli
+      - export PATH=$PATH:/root/.local/bin
+      - sam --version
+      - npm i npm@latest -g
+      - cd dependencies/nodejs
+      - npm install
+      - cd ../..
+      - sam build
+      - sam package --s3-bucket listman --output-template-file output.yaml
+      - sam deploy --template-file output.yaml --stack-name listman --capabilities CAPABILITY_IAM 
+
+
+#      - export BUCKET=listman-prod-artifact
+#      - aws cloudformation package --template-file template.yaml --s3-bucket $BUCKET --output-template-file outputtemplate.yaml
+#artifacts:
+#  type: zip
+#  files:
+#    - template.yaml
+#    - outputtemplate.yaml

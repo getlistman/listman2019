@@ -13,7 +13,7 @@ if (window.location.hostname == 'localhost') {
   })
 } else {
   //const cookieDomain = window.location.hostname
-  const cookieDomain = 'd6er.com'
+  const cookieDomain = 'y15e.io'
   Amplify.configure({
     Auth: {
       cookieStorage: {

@@ -74,7 +74,6 @@ export default {
         attributes: { email: this.email }
       }).then(user => {
         this.state = 'confirm'
-        console.log(user)
       }).catch(err => {
         console.log(err)
       })
@@ -91,7 +90,6 @@ export default {
         }
         return this.$store.dispatch('callApi', payload)
       }).then(() => {
-        console.log('router.go /')
         this.$router.go('/')
       }).catch(err => {
         console.log(err)
