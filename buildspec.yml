@@ -4,7 +4,7 @@ phases:
 
   install:
     runtime-versions:
-      - nodejs: 8
+      nodejs: 8
     commands:
       - pip install --upgrade pip
       - pip install --upgrade awscli
