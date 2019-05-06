@@ -157,6 +157,7 @@ Resources:
       Name: listman.y15e.io
       AliasTarget:
         DNSName: !GetAtt ListmanDomain.DistributionDomainName
+        HostedZoneId: !GetAtt ListmanDomain.DistributionHostedZoneId
 
 # Cannot create a custom domain for websocket via cloudformation
 # https://forums.aws.amazon.com/thread.jspa?threadID=299771
