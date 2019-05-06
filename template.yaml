@@ -151,6 +151,12 @@ Resources:
       RestApiId: !Ref SSRAPI
       Stage: prod
 
+  ListmanDNSRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name: listman.y15e.io
+      AliasTarget: !Ref ListmanDomain
+
 # Cannot create a custom domain for websocket via cloudformation
 # https://forums.aws.amazon.com/thread.jspa?threadID=299771
 #
