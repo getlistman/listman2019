@@ -155,6 +155,7 @@ Resources:
     Type: AWS::Route53::RecordSet
     Properties:
       Name: listman.y15e.io
+      Type: A
       AliasTarget:
         DNSName: !GetAtt ListmanDomain.DistributionDomainName
         HostedZoneId: !GetAtt ListmanDomain.DistributionHostedZoneId
