@@ -12,12 +12,10 @@ phases:
       - export PATH=$PATH:/root/.local/bin
       - sam --version
       - npm i -g npm@latest
-      - cd dependencies/nodejs
-      - npm install
-      - cd ../..
       - npm install
       - npx webpack --config build/webpack.client.config.js
       - npx webpack --config build/webpack.server.config.js
+      - mv node_modules nodependencies/nodejs/
       - sam build
       - sam package --s3-bucket listman-s3-bucket --output-template-file output.yaml
       - sam deploy --template-file output.yaml --stack-name listman --capabilities CAPABILITY_IAM 
