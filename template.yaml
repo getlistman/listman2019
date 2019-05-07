@@ -12,6 +12,8 @@ Resources:
       FunctionName: listman
       Layers:
         - !Ref ListmanLayer
+      Environment:
+        AWS_PROJECT_REGION: "us-east-1"
       Events:
         Index:
           Type: Api
