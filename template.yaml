@@ -15,6 +15,7 @@ Resources:
       Environment:
         Variables:
           AWS_PROJECT_REGION: "us-east-1"
+          MONGO_URL: "{{resolve:ssm:/listman/prod/MONGO_URL:1}}"
       Events:
         Index:
           Type: Api
