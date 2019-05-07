@@ -12,13 +12,13 @@ phases:
       - export PATH=$PATH:/root/.local/bin
       - sam --version
       - npm i -g npm@latest
+      - cd dependencies/nodejs/
       - npm install
+      - cd ../..
+      - sam build
+      - mv .aws-sam/build/SSRFunction/node_modules ./
       - npx webpack --config build/webpack.client.config.js
       - npx webpack --config build/webpack.server.config.js
-      - mv node_modules ./dependencies/nodejs/
-      - sam build
-      - rm -rf .aws-sam/build/SSRFunction/node_modules
-      - ls -la .aws-sam/build/SSRFunction
       - sam package --s3-bucket listman-s3-bucket --output-template-file output.yaml
       - sam deploy --template-file output.yaml --stack-name listman --capabilities CAPABILITY_IAM 
 
