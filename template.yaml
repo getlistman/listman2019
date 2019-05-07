@@ -16,6 +16,12 @@ Resources:
         Variables:
           AWS_PROJECT_REGION: "us-east-1"
           MONGO_URL: "{{resolve:ssm:/listman/prod/MONGO_URL:1}}"
+          AWS_PROJECT_REGION: "{{resolve:ssm:/listman/prod/AWS_PROJECT_REGION:1}}"
+          AWS_COGNITO_IDENTITY_POOL_ID: "{{resolve:ssm:/listman/prod/AWS_COGNITO_IDENTITY_POOL_ID:1}}"
+          AWS_COGNITO_REGION: "{{resolve:ssm:/listman/prod/AWS_COGNITO_REGION:1}}"
+          AWS_USER_POOLS_ID: "{{resolve:ssm:/listman/prod/AWS_USER_POOLS_ID:1}}"
+          AWS_USER_POOLS_WEB_CLIENT_ID: "{{resolve:ssm:/listman/prod/AWS_USER_POOLS_WEB_CLIENT_ID:1}}"
+          
       Events:
         Index:
           Type: Api
