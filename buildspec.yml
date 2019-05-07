@@ -17,6 +17,7 @@ phases:
       - npx webpack --config build/webpack.server.config.js
       - mv node_modules ./dependencies/nodejs/
       - sam build
+      - ls -la .aws-sam/build/SSRFunction
       - sam package --s3-bucket listman-s3-bucket --output-template-file output.yaml
       - sam deploy --template-file output.yaml --stack-name listman --capabilities CAPABILITY_IAM 
 
