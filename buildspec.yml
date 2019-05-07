@@ -15,7 +15,7 @@ phases:
       - npm install
       - npx webpack --config build/webpack.client.config.js
       - npx webpack --config build/webpack.server.config.js
-      - mv node_modules nodependencies/nodejs/
+      - mv node_modules ./dependencies/nodejs/
       - sam build
       - sam package --s3-bucket listman-s3-bucket --output-template-file output.yaml
       - sam deploy --template-file output.yaml --stack-name listman --capabilities CAPABILITY_IAM 
