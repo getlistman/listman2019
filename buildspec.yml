@@ -18,6 +18,7 @@ phases:
       - cd ../..
       - echo "Installing node modules for webpack..."
       - npm install
+      - amplify configure --yes
       - amplify init --amplify "{\"envName\":\"prod\"}" --yes
       - amplify env checkout prod --yes
       - cat src/aws-exports.js
