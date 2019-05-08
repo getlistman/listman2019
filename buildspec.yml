@@ -19,6 +19,7 @@ phases:
       - echo "Installing node modules for webpack..."
       - npm install
       - amplify init
+      - cat src/aws-exports.js
       - npx webpack --config build/webpack.client.config.js
       - npx webpack --config build/webpack.server.config.js
       - echo "Running sam build, package and deploy..."
