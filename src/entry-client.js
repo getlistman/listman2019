@@ -3,6 +3,8 @@ import Amplify, { Auth, Hub, Logger } from 'aws-amplify';
 import LocalCookieStorage from '../src-server/LocalCookieStorage'
 
 import aws_exports from './aws-exports'
+console.log('[aws_exports in entry-client.js]')
+console.dir(aws_exports)
 Amplify.configure(aws_exports)
 
 if (window.location.hostname == 'localhost') {
