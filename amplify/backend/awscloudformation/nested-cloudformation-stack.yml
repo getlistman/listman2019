@@ -81,7 +81,7 @@
 		"authcognito": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/listman-master-20190501173903-deployment/amplify-cfn-templates/auth/cognito-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/listman-prod-20190508205127-deployment/amplify-cfn-templates/auth/cognito-cloudformation-template.yml",
 				"Parameters": {
 					"identityPoolName": "listman_idpool",
 					"allowUnauthenticatedIdentities": false,
@@ -141,7 +141,7 @@
 							"Arn"
 						]
 					},
-					"env": "master"
+					"env": "prod"
 				}
 			}
 		}
