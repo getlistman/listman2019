@@ -15,14 +15,13 @@ let coldStart = true
 module.exports.index = async (event, context) => {
   
   // Logging
-  console.log('[handler.js] event.isOffline: ' + event.isOffline)
-  console.log('[handler.js] stage: ' + event.requestContext.stage)
-  console.log('[handler.js] STAGE: ' + process.env.STAGE)
+  console.log('[handler.js] event')
+  console.dir(event)
+  console.log('[handler.js] context')
+  console.dir(context)
+
   if (coldStart) {
     console.log('[handler.js] COLD START path: ' + event.path)
-  }
-  if (event.hasOwnProperty('requestContext')) {
-    console.log('[handler.js] eventType: ' + event.requestContext.eventType)
   }
   
   context.callbackWaitsForEmptyEventLoop = false
