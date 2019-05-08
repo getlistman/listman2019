@@ -67,7 +67,7 @@ Resources:
                   in: path
               "x-amazon-apigateway-integration":
                 uri:
-                  "http://listman-s3-bucket.s3-website-us-east-1.amazonaws.com/{proxy}"
+                  "http://listman-dist.s3-website-us-east-1.amazonaws.com/{proxy}"
                 requestParameters:
                   "integration.request.path.proxy": "method.request.path.proxy"
                 httpMethod: get
@@ -170,6 +170,16 @@ Resources:
       AliasTarget:
         DNSName: !GetAtt ListmanDomain.DistributionDomainName
         HostedZoneId: !GetAtt ListmanDomain.DistributionHostedZoneId
+
+  DistBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      Name: listman-dist
+      
+  PackageBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      Name: listman-package
 
 # Cannot create a custom domain for websocket via cloudformation
 # https://forums.aws.amazon.com/thread.jspa?threadID=299771

@@ -23,7 +23,7 @@ phases:
       - echo "Running sam build, package and deploy..."
       - sam build
       - rm -rf .aws-sam/build/SSRFunction/node_modules
-      - sam package --s3-bucket listman-s3-bucket --output-template-file output.yaml
+      - sam package --s3-bucket listman-package --output-template-file output.yaml
       - sam deploy --template-file output.yaml --stack-name listman --capabilities CAPABILITY_IAM 
 
 
