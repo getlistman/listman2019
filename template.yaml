@@ -174,12 +174,12 @@ Resources:
   DistBucket:
     Type: AWS::S3::Bucket
     Properties:
-      Name: listman-dist
+      BucketName: listman-dist
       
   PackageBucket:
     Type: AWS::S3::Bucket
     Properties:
-      Name: listman-package
+      BucketName: listman-package
 
 # Cannot create a custom domain for websocket via cloudformation
 # https://forums.aws.amazon.com/thread.jspa?threadID=299771
