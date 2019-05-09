@@ -18,9 +18,9 @@ phases:
       - cd ../..
       - echo "Installing node modules for webpack..."
       - npm install
-      - export AMPLIFY="{\"envName\":\"prod\"}" --providers "{\"awscloudformation\":{\"configLevel\":\"project\",\"useProfile\":\"false\",\"profileName\":\"default\",\"accessKeyId\":\"$AMPLIFY_ID\",\"secretAccessKey\":\"$AMPLIFY_SECRET\",\"region\":\"us-east-1\"}}"
+      - export AMPLIFY="{\"awscloudformation\":{\"configLevel\":\"project\",\"useProfile\":\"false\",\"profileName\":\"default\",\"accessKeyId\":\"${AMPLIFY_ID}\",\"secretAccessKey\":\"${AMPLIFY_SECRET}\",\"region\":\"us-east-1\"}}"
       - echo $AMPLIFY
-      - amplify init --amplify "{\"envName\":\"prod\"}" --providers "{\"awscloudformation\":{\"configLevel\":\"project\",\"useProfile\":\"false\",\"profileName\":\"default\",\"accessKeyId\":\"$AMPLIFY_ID\",\"secretAccessKey\":\"$AMPLIFY_SECRET\",\"region\":\"us-east-1\"}}" --yes
+      - amplify init --amplify "{\"envName\":\"prod\"}" --providers "{\"awscloudformation\":{\"configLevel\":\"project\",\"useProfile\":\"false\",\"profileName\":\"default\",\"accessKeyId\":\"${AMPLIFY_ID}\",\"secretAccessKey\":\"${AMPLIFY_SECRET}\",\"region\":\"us-east-1\"}}" --yes
       - amplify env checkout prod --yes
       - cat src/aws-exports.js
       - npx webpack --config build/webpack.client.config.js
