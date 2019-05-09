@@ -18,10 +18,14 @@ phases:
       - cd ../..
       - echo "Installing node modules for webpack..."
       - npm install
-      - export AMPLIFY="{\"awscloudformation\":{\"configLevel\":\"project\",\"useProfile\":\"false\",\"profileName\":\"default\",\"accessKeyId\":\"${AMPLIFY_ID}\",\"secretAccessKey\":\"${AMPLIFY_SECRET}\",\"region\":\"us-east-1\"}}"
-      - echo $AMPLIFY
-      - aws --version
-      - amplify init --amplify "{\"envName\":\"prod\"}" --providers $AMPLIFY --yes
+      - echo "Initializing amplify..."
+      - mkdir ~/.aws
+      - echo "[default]" > ~/.aws/credentials
+      - echo "aws_access_key_id=$AMPLIFY_ID" >> ~/.aws/credentials
+      - echo "aws_secret_access_key=$AMPLIFY_SECRET" >> ~/.aws/credentials
+      - echo "[default]" > ~/.aws/config
+      - echo "region=us-east-1" >> ~/.aws/config
+      - amplify init --amplify "{\"envName\":\"prod\"}" --yes
       - amplify env checkout prod --yes
       - cat src/aws-exports.js
       - npx webpack --config build/webpack.client.config.js
