@@ -30,7 +30,7 @@ phases:
       - echo "Building client/server bundles..."
       - npx webpack --config build/webpack.client.config.js
       - npx webpack --config build/webpack.server.config.js
-      - node-sass --omit-source-map-url sass/bulma.scss dist/css/bulma.css
+      - npx node-sass --omit-source-map-url sass/bulma.scss dist/css/bulma.css
       - aws s3 cp dist/ s3://listman-dist/ --recursive
       - echo "Running sam build, package and deploy..."
       - sam build
