@@ -3,19 +3,30 @@ import Amplify, { Auth, Hub, Logger } from 'aws-amplify';
 import LocalCookieStorage from '../src-server/LocalCookieStorage'
 
 import aws_exports from './aws-exports'
-console.log('[aws_exports in entry-client.js]')
-console.dir(aws_exports)
-Amplify.configure(aws_exports)
+//Amplify.configure(aws_exports)
 
 if (window.location.hostname == 'localhost') {
+  aws_exports.Auth = {
+    storage: new LocalCookieStorage()
+  }
+  Amplify.configure(aws_exports)
+  /*
   Amplify.configure({
     Auth: {
       storage: new LocalCookieStorage()
     }
   })
+  */
 } else {
   //const cookieDomain = window.location.hostname
   const cookieDomain = 'y15e.io'
+  aws_exports.Auth = {
+    cookieStorage: {
+      domain: cookieDomain,
+    }
+  }
+  Amplify.configure(aws_exports)
+  /*
   Amplify.configure({
     Auth: {
       cookieStorage: {
@@ -23,6 +34,7 @@ if (window.location.hostname == 'localhost') {
       }
     }
   })
+  */
 }
 
 const { app, router, store } = createApp()

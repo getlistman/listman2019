@@ -10,19 +10,23 @@ global.fetch = global.fetch || fetch
 /* Amplify */
 import Amplify, { Auth } from 'aws-amplify'
 import aws_exports from './aws-exports'
-console.log('[aws_exports in entry-server.js]')
-console.dir(aws_exports)
-Amplify.configure(aws_exports)
+//Amplify.configure(aws_exports)
 
 export default context => {
   
   /* Cookie */
+  aws_exports.Auth = {
+    storage: new CustomStorage(context.cookies)
+  }
+  Amplify.configure(aws_exports)
+  /*
   Amplify.configure({
     Auth: {
       storage: new CustomStorage(context.cookies)
     }
   })
-
+  */
+  
   return new Promise((resolve, reject) => {
     
     return mongo.connect(config.mongo_url).then(db => {
