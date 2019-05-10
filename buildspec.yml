@@ -26,6 +26,7 @@ phases:
       - echo "[default]" > ~/.aws/config
       - echo "region=us-east-1" >> ~/.aws/config
       - amplify init --amplify "{\"envName\":\"prod\"}" --yes
+      - amplify env checkout prod
       - cat src/aws-exports.js
       - echo "Building client/server bundles..."
       - npx webpack --config build/webpack.client.config.js
