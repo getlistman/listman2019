@@ -18,11 +18,7 @@ export default context => {
   Auth.configure({
     storage: new CustomStorage(context.cookies)
   })
-  /*
-  aws_exports.Auth = {
-    storage: new CustomStorage(context.cookies)
-  }
-  */
+  aws_exports.storage = new CustomStorage(context.cookies)
   Amplify.configure(aws_exports)
   /*
   Amplify.configure({
