@@ -59,8 +59,8 @@
   },
   "files": [
     "config",
-    "dist/vue-ssr-client-manifest.json",
-    "dist/vue-ssr-server-bundle.json",
+    "dist/bundle/vue-ssr-client-manifest.json",
+    "dist/bundle/vue-ssr-server-bundle.json",
     "src/aws-exports.js",
     "src/index.template.html",
     "src-server"
