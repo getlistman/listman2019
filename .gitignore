@@ -2,6 +2,8 @@ node_modules
 jspm_packages
 package-lock.json
 .serverless
+dist/bundle/
+dist/css/bulma.css
 
 #amplify
 amplify/\#current-cloud-backend
@@ -9,7 +11,7 @@ amplify/.config/local-*
 amplify/backend/amplify-meta.json
 amplify/backend/awscloudformation
 build/
-dist/
+#dist/
 node_modules/
 aws-exports.js
 awsconfiguration.json

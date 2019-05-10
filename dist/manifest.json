@@ -1,0 +1,18 @@
+{
+  "short_name": "listman",
+  "name": "listman",
+  "icons": [
+    {
+      "src": "/dist/images/icons-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/dist/images/icons-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone"
+}
