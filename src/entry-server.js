@@ -15,9 +15,14 @@ import aws_exports from './aws-exports'
 export default context => {
   
   /* Cookie */
+  Auth.configure({
+    storage: new CustomStorage(context.cookies)
+  })
+  /*
   aws_exports.Auth = {
     storage: new CustomStorage(context.cookies)
   }
+  */
   Amplify.configure(aws_exports)
   /*
   Amplify.configure({
