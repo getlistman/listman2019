@@ -14,16 +14,19 @@ let coldStart = true
 
 module.exports.index = async (event, context) => {
   
+  // CloudWatch event (ping)
+  console.log('[handler.js] coldStart: ' + coldStart)
+  if (event.source == 'aws.events') {
+    console.log('aws ping return');
+    return { statusCode: 200 }
+  }
+
   // Logging
   console.log('[handler.js] event')
   console.dir(event)
   console.log('[handler.js] context')
   console.dir(context)
 
-  if (coldStart) {
-    console.log('[handler.js] COLD START path: ' + event.path)
-  }
-  
   context.callbackWaitsForEmptyEventLoop = false
   coldStart = false
   
