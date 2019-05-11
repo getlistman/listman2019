@@ -51,6 +51,8 @@ module.exports.index = async (event, context) => {
   // HTTP
   if (event.path == '/auth/google') {
     return google.index()
+  } else if (event.path == '/auth/google/callback') {
+    return google.callback(event)
   } else {
     const cookies = event.hasOwnProperty('headers') && event.headers.hasOwnProperty('Cookie')
           ? cookie.parse(event.headers.Cookie) : ''
