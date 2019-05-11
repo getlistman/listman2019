@@ -14,7 +14,14 @@ import awsmobile from './aws-exports'
 
 export default context => {
   
-  awsmobile.Auth = { storage: new CustomStorage(context.cookies) }
+  let newStorage = new CustomStorage(context.cookies)
+  awsmobile.Auth = { storage: newStorage }
+  console.log('[CustomStorage]')
+  console.dir(CustomStorage)
+  console.log('[newStorage]')
+  console.log(newStorage)
+  console.log('[awsmobile]')
+  console.dir(awsmobile)
   Amplify.configure(awsmobile)
 
   return new Promise((resolve, reject) => {
