@@ -7,7 +7,7 @@ export default class CustomStorage {
     
     // Dummy property to bypass isEmpty() check.
     // https://github.com/aws-amplify/amplify-js/commit/816a827d16a8736d61ec571e19207c9a6b062d97#diff-1cf5b10c87e919f81d5f1ea503f15074
-    this.a = "foo"
+    this._dummy_property = "dummy"
     
     Object.keys(data).forEach(key => {
       this[key] = data[key]

@@ -19,8 +19,6 @@ module.exports.index = async (event, context) => {
   console.dir(event)
   console.log('[handler.js] context')
   console.dir(context)
-  console.log('[handler.js] process.env')
-  console.dir(process.env)
 
   if (coldStart) {
     console.log('[handler.js] COLD START path: ' + event.path)
