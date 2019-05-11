@@ -8,8 +8,7 @@ const util = require('util')
 const amplifyAuth = require('./amplify-auth').default
 const mongo = require('../mongo')
 
-console.log('[google.js] config')
-console.dir(config)
+console.log('[google.js] config: ' + config)
 
 const oauth2Client = new google.auth.OAuth2(
   config.GOOGLE_CLIENT_ID,
