@@ -1,8 +1,10 @@
+// https://aws-amplify.github.io/docs/js/authentication#managing-security-tokens
 import * as Cookies from 'js-cookie';
 
 export default class CustomStorage {
 
   constructor(data) {
+    this.a = "foo"
     Object.keys(data).forEach(key => {
       this[key] = data[key]
     })
