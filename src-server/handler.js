@@ -16,7 +16,7 @@ module.exports.index = async (event, context) => {
   
   context.callbackWaitsForEmptyEventLoop = false
 
-  console.log('[handler.js] coldStart: ' + coldStart)
+  console.log('[handler.js] coldStart: ' + coldStart + ' ' + event.source)
   coldStart = false
 
   // CloudWatch event (ping)
