@@ -1,7 +1,7 @@
 {
-  "name": "vue-ssr-serverless",
+  "name": "listman",
   "version": "1.0.0",
-  "description": "Vue SSR Serverless Minimum Example",
+  "description": "Vue SSR Serverless Example Application",
   "main": "handler.js",
   "dependencies": {
     "aws-amplify": "^1.1.27",
@@ -23,6 +23,8 @@
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.7.0",
@@ -82,7 +84,8 @@
       "vue"
     ],
     "transform": {
-      ".*\\.(vue)$": "vue-jest"
+      ".*\\.(vue)$": "vue-jest",
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     }
   }
 }
