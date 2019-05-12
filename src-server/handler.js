@@ -14,8 +14,12 @@ let coldStart = true
 
 module.exports.index = async (event, context) => {
   
-  // CloudWatch event (ping)
+  context.callbackWaitsForEmptyEventLoop = false
+
   console.log('[handler.js] coldStart: ' + coldStart)
+  coldStart = false
+
+  // CloudWatch event (ping)
   if (event.source == 'aws.events') {
     console.log('aws ping return');
     return { statusCode: 200 }
@@ -26,9 +30,6 @@ module.exports.index = async (event, context) => {
   console.dir(event)
   console.log('[handler.js] context')
   console.dir(context)
-
-  context.callbackWaitsForEmptyEventLoop = false
-  coldStart = false
   
   // WebSocket
   if (event.hasOwnProperty('requestContext')) {
