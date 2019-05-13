@@ -1,9 +1,46 @@
-import { mount } from '@vue/test-utils'
-import Component from './src/views/Home.vue'
+import { mount, shallowMount, createLocalVue } from '@vue/test-utils'
 
-describe('Component', () => {
+import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+
+import App from './src/App.vue'
+import Home from './src/views/Home.vue'
+import NavbarGuest from './src/views/NavbarGuest.vue'
+
+const localVue = createLocalVue() 
+
+localVue.use(VueRouter)
+localVue.use(Vuex)
+
+describe('App', () => {
+  
+  let store = new Vuex.Store({})
+  let router = new VueRouter()
+  
+  const wrapper = mount(App, { store, router, localVue })
+  
   test('is a Vue instance', () => {
-    const wrapper = mount(Component)
     expect(wrapper.isVueInstance()).toBeTruthy()
+  })
+
+  test('contains Home', () => {
+    expect(wrapper.contains(Home)).toBe(true)
+  })
+
+  test('contains NavbarGuest', () => {
+    expect(wrapper.contains(NavbarGuest)).toBe(true)
+  })
+})
+
+describe('Home', () => {
+  
+  const wrapper = mount(Home)
+  
+  test('is a Vue instance', () => {
+    expect(wrapper.isVueInstance()).toBeTruthy()
+  })
+  
+  test('contains .container', () => {
+    expect(wrapper.contains('.container')).toBe(true)
   })
 })
