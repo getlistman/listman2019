@@ -1,6 +1,7 @@
 import { mount, shallowMount, createLocalVue } from '@vue/test-utils'
 
 import VueRouter from 'vue-router'
+import { createRouter } from './src/router'
 import Vuex from 'vuex'
 
 import App from './src/App.vue'
@@ -15,9 +16,11 @@ localVue.use(Vuex)
 describe('App', () => {
   
   let store = new Vuex.Store({})
-  let router = new VueRouter()
+  let router = createRouter(store)
   
   const wrapper = mount(App, { store, router, localVue })
+  
+  console.log(wrapper.html())
   
   test('is a Vue instance', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()

@@ -9,7 +9,7 @@
           Home
         </span>
       </router-link>
-      <router-link to="/signup" class="navbar-item is-tab is-capitalized">
+      <router-link to="/signup" id="signup" class="navbar-item is-tab is-capitalized">
         <span class="icon">
           <i class="fas fa-user-plus"></i>
         </span>
@@ -17,7 +17,7 @@
           Sign Up
         </span>
       </router-link>
-      <router-link to="/signin" class="navbar-item is-tab is-capitalized">
+      <router-link to="/signin" id="signin" class="navbar-item is-tab is-capitalized">
         <span class="icon">
           <i class="fas fa-sign-in-alt"></i>
         </span>

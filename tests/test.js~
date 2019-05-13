@@ -1,0 +1,10 @@
+module.exports = {
+  'listman e2e' : function (browser) {
+    browser
+      .url('https://listman.y15e.io')
+      .waitForElementVisible('body')
+      .click('a[href="/signin"]')
+      .waitForElementVisible('input[name="username"]')
+      .end();
+  }
+};
