@@ -32,6 +32,8 @@
     "css-loader": "^1.0.1",
     "hapi-plugin-websocket": "^1.2.19",
     "jest": "^24.8.0",
+    "jsdom": "^15.1.0",
+    "jsdom-global": "^3.0.2",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "serverless-domain-manager": "^2.6.13",
@@ -76,16 +78,5 @@
   "bugs": {
     "url": "https://github.com/y15e/listman/issues"
   },
-  "homepage": "https://github.com/y15e/listman#readme",
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "vue"
-    ],
-    "transform": {
-      ".*\\.(vue)$": "vue-jest",
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
-    }
-  }
+  "homepage": "https://github.com/y15e/listman#readme"
 }
