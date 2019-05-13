@@ -25,6 +25,8 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "bulma": "^0.7.4",
+    "chromedriver": "^74.0.0",
+    "nightwatch": "^1.0.19",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "vue-loader": "^15.7.0",

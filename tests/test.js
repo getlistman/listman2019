@@ -3,12 +3,16 @@ module.exports = {
     browser
       .url('https://listman.y15e.io')
       .waitForElementVisible('body')
-      .click('a[href="/signin"]')
+      .click('#signin')
       .waitForElementVisible('input[name="username"]')
       .setValue('input[name="username"]', 'y15e')
       .setValue('input[name="password"]', 'Test!234')
       .click('button.is-primary')
       .waitForElementVisible('table.is-fullwidth')
+      .click('table.is-fullwidth a:first-child')
+      .waitForElementVisible('div.tabs')
+      .click('#signout')
+      .waitForElementVisible('figure.image')
       .end();
   }
 };
