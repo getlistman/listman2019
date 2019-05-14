@@ -4,6 +4,8 @@ package-lock.json
 .serverless
 dist/bundle/
 dist/css/bulma.css
+tests_output
+chromedriver.log
 
 #amplify
 amplify/\#current-cloud-backend
