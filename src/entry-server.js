@@ -16,12 +16,6 @@ export default context => {
   
   let newStorage = new CustomStorage(context.cookies)
   awsmobile.Auth = { storage: newStorage }
-  console.log('[CustomStorage]')
-  console.dir(CustomStorage)
-  console.log('[newStorage]')
-  console.log(newStorage)
-  console.log('[awsmobile]')
-  console.dir(awsmobile)
   Amplify.configure(awsmobile)
 
   return new Promise((resolve, reject) => {
@@ -62,6 +56,9 @@ export default context => {
 
       }).then(() => {
         
+        console.log('[entry-server.js] context');
+        console.log(context);
+        console.dir(context);
         router.push(context.url)
         
         router.onReady(() => {
