@@ -56,9 +56,10 @@ export default context => {
 
       }).then(() => {
         
-        console.log('[entry-server.js] context');
-        console.log(context);
-        console.dir(context);
+        if (!context.url) {
+          console.log('[entry-server.js] context');
+          console.dir(context);
+        }
         router.push(context.url)
         
         router.onReady(() => {
