@@ -26,10 +26,12 @@ module.exports.index = async (event, context) => {
   }
 
   // Logging
+  /*
   console.log('[handler.js] event')
   console.dir(event)
   console.log('[handler.js] context')
   console.dir(context)
+  */
   
   // WebSocket
   if (event.hasOwnProperty('requestContext')) {
