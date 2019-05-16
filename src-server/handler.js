@@ -58,6 +58,8 @@ module.exports.index = async (event, context) => {
   } else if (event.path == '/auth/google/callback') {
     return google.callback(event)
   } else {
+    console.log('[handler.js] event')
+    console.dir(event)
     const cookies = event.hasOwnProperty('headers') && event.headers.hasOwnProperty('Cookie')
           ? cookie.parse(event.headers.Cookie) : ''
     const ssrBody = await util.promisify(ssr)(event, cookies)
