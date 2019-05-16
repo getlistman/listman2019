@@ -53,6 +53,7 @@ Resources:
     Properties:
       Name: listman
       StageName: prod
+      MinimumCompressionSize: 256
       DefinitionBody:
         swagger: "2.0"
         paths:
