@@ -60,7 +60,7 @@ module.exports.index = async (event, context) => {
   } else {
     
     if (true) {
-      console.log('[handler.js] event')
+      //console.log('[handler.js] event')
       console.dir(event)
     }
     
