@@ -8,7 +8,7 @@ Resources:
     Properties:
       Handler: "src-server/handler.index"
       Runtime: nodejs8.10
-      Timeout: 10
+      Timeout: 30
       FunctionName: listman
       Layers:
         - !Ref ListmanLayer
