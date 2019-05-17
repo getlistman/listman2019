@@ -38,6 +38,8 @@ module.exports.index = async (event, context) => {
     if (event.requestContext.eventType == 'CONNECT') {
       await websocket(event)
       return { statusCode: 200 }
+    } else if (event.requestContext.eventType == 'DISCONNECT') {
+      return { statusCode: 200 }
     } else if (event.requestContext.eventType == 'MESSAGE') {
       const wsResult = await websocket(event)
       if (event.isOffline) {
