@@ -1,7 +1,6 @@
 version: 0.2
 
 phases:
-
   install:
     runtime-versions:
       nodejs: 8
@@ -11,6 +10,8 @@ phases:
       - pip install --user aws-sam-cli
       - export PATH=$PATH:/root/.local/bin
       - sam --version
+  pre_build:
+    commands:
       - npm i -g npm@latest @aws-amplify/cli
       - echo "Installing node modules for layer..."
       - cd dependencies/nodejs
@@ -31,6 +32,8 @@ phases:
       - amplify init --amplify "{\"envName\":\"prod\"}" --yes
       - amplify env checkout prod
       - cat src/aws-exports.js
+  build:
+    commands:
       - echo "Building client/server bundles..."
       - npx webpack --config build/webpack.client.config.js
       - npx webpack --config build/webpack.server.config.js
@@ -39,6 +42,8 @@ phases:
       - echo "Running sam build, package and deploy..."
       - sam build
       - rm -rf .aws-sam/build/SSRFunction/node_modules
+  post_build:
+    commands:
       - sam package --s3-bucket listman-package --output-template-file output.yaml
       - sam deploy --template-file output.yaml --stack-name listman --capabilities CAPABILITY_IAM 
 
