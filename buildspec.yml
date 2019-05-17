@@ -13,8 +13,11 @@ phases:
       - sam --version
       - npm i -g npm@latest @aws-amplify/cli
       - echo "Installing node modules for layer..."
-      - cd dependencies/nodejs/
+      - cd dependencies/nodejs
       - npm install
+      - cd node_modules/gaxios
+      - npm install node-fetch@2.2.0
+      - cd ../..
       - cd ../..
       - echo "Installing node modules for webpack..."
       - npm install
