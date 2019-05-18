@@ -170,7 +170,7 @@ Resources:
     Properties:
       DomainName: !Ref ListmanDomain
       RestApiId: !Ref SSRAPI
-      Stage: Sub ${ListmanEnv}
+      Stage: !Ref ListmanEnv
 
   ListmanDNSRecord:
     Type: AWS::Route53::RecordSet
