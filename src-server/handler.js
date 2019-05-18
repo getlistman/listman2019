@@ -14,24 +14,31 @@ let coldStart = true
 
 module.exports.index = async (event, context) => {
   
-  // Logging
-  console.log('[handler.js] event.isOffline: ' + event.isOffline)
-  console.log('[handler.js] stage: ' + event.requestContext.stage)
-  console.log('[handler.js] STAGE: ' + process.env.STAGE)
-  if (coldStart) {
-    console.log('[handler.js] COLD START path: ' + event.path)
-  }
-  if (event.hasOwnProperty('requestContext')) {
-    console.log('[handler.js] eventType: ' + event.requestContext.eventType)
-  }
-  
   context.callbackWaitsForEmptyEventLoop = false
+
+  console.log('[handler.js] coldStart: ' + coldStart + ' ' + event.source)
   coldStart = false
+
+  // CloudWatch event (ping)
+  if (event.source == 'aws.events') {
+    console.log('aws ping return');
+    return { statusCode: 200 }
+  }
+
+  // Logging
+  /*
+  console.log('[handler.js] event')
+  console.dir(event)
+  console.log('[handler.js] context')
+  console.dir(context)
+  */
   
   // WebSocket
   if (event.hasOwnProperty('requestContext')) {
     if (event.requestContext.eventType == 'CONNECT') {
       await websocket(event)
+      return { statusCode: 200 }
+    } else if (event.requestContext.eventType == 'DISCONNECT') {
       return { statusCode: 200 }
     } else if (event.requestContext.eventType == 'MESSAGE') {
       const wsResult = await websocket(event)
@@ -50,7 +57,15 @@ module.exports.index = async (event, context) => {
   // HTTP
   if (event.path == '/auth/google') {
     return google.index()
+  } else if (event.path == '/auth/google/callback') {
+    return google.callback(event)
   } else {
+    
+    if (true) {
+      //console.log('[handler.js] event')
+      console.dir(event)
+    }
+    
     const cookies = event.hasOwnProperty('headers') && event.headers.hasOwnProperty('Cookie')
           ? cookie.parse(event.headers.Cookie) : ''
     const ssrBody = await util.promisify(ssr)(event, cookies)

@@ -39,7 +39,7 @@
               </router-link>
             </li>
             <li>
-              <a @click="signOut" href="/">
+              <a id="signout" @click="signOut" href="/">
                 <span class="icon">
                   <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                 </span>

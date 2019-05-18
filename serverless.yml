@@ -37,9 +37,12 @@ functions:
   websocket:
     handler: src-server/handler.index
     events:
-      - websocket: $connect
-      - websocket: $disconnect
-      - websocket: $default
+      - websocket:
+          route: $connect
+      - websocket:
+          route: $disconnect
+      - websocket:
+          route: $default
 
 package:
   exclude:
@@ -106,7 +109,7 @@ custom:
     bucketName: listman-s3-bucket
     distributionFolder: dist
   customDomain:
-    domainName: listman.d6er.com
-    certificateName: '*.d6er.com'
+    domainName: listman.y15e.io
+    certificateName: '*.y15e.io'
     basePath: ''
     stage: ${self:provider.stage}

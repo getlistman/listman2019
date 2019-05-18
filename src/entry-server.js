@@ -9,17 +9,14 @@ global.fetch = global.fetch || fetch
 
 /* Amplify */
 import Amplify, { Auth } from 'aws-amplify'
-import aws_exports from './aws-exports'
-Amplify.configure(aws_exports)
+import awsmobile from './aws-exports'
+//Amplify.configure(aws_exports)
 
 export default context => {
   
-  /* Cookie */
-  Amplify.configure({
-    Auth: {
-      storage: new CustomStorage(context.cookies)
-    }
-  })
+  let newStorage = new CustomStorage(context.cookies)
+  awsmobile.Auth = { storage: newStorage }
+  Amplify.configure(awsmobile)
 
   return new Promise((resolve, reject) => {
     
@@ -59,6 +56,10 @@ export default context => {
 
       }).then(() => {
         
+        if (!context.url) {
+          console.log('[entry-server.js] context');
+          console.dir(context);
+        }
         router.push(context.url)
         
         router.onReady(() => {

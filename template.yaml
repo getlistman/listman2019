@@ -1,0 +1,198 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  ListmanEnv:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - prod
+      - dev
+  ListmanBaseName:
+    Type: String
+    Default: listdev
+    AllowedValues:
+      - listman
+      - listdev
+
+Resources:
+
+  SSRFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: "src-server/handler.index"
+      Runtime: nodejs8.10
+      Timeout: 30
+      FunctionName: !Ref ListmanBaseName
+      Layers:
+        - !Ref ListmanLayer
+      Environment:
+        Variables:
+          MONGO_URL: "{{resolve:ssm:/listman/prod/MONGO_URL:1}}"
+          GOOGLE_CLIENT_ID: "{{resolve:ssm:/listman/prod/GOOGLE_CLIENT_ID:1}}"
+          GOOGLE_CLIENT_SECRET: "{{resolve:ssm:/listman/prod/GOOGLE_CLIENT_SECRET:1}}"
+          GOOGLE_CALLBACK_URL: "{{resolve:ssm:/listman/prod/GOOGLE_CALLBACK_URL:1}}"
+      Events:
+        Index:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+            RestApiId: !Ref SSRAPI
+        SSR:
+          Type: Api
+          Properties:
+            Path: "/{proxy+}"
+            Method: get
+            RestApiId: !Ref SSRAPI
+      Policies:
+      - Statement:
+        - Effect: Allow
+          Action:
+          - 'execute-api:ManageConnections'
+          Resource:
+          - !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocketAPI}/*'
+
+  ListmanLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !Sub ${ListmanBaseName}-layer
+      ContentUri: dependencies/
+      CompatibleRuntimes:
+        - nodejs8.10
+      RetentionPolicy: Delete
+
+  SSRAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Ref ListmanBaseName
+      StageName: !Ref ListmanEnv
+      MinimumCompressionSize: 256
+      DefinitionBody:
+        swagger: "2.0"
+        paths:
+          "/dist/{proxy+}":
+            get:
+              parameters:
+                - name: proxy
+                  in: path
+              "x-amazon-apigateway-integration":
+                uri: !Sub
+                  "http://${ListmanBaseName}-dist.s3-website-us-east-1.amazonaws.com/{proxy}"
+                requestParameters:
+                  "integration.request.path.proxy": "method.request.path.proxy"
+                httpMethod: get
+                type: "http_proxy"
+          "/{proxy+}":
+            get:
+              parameters:
+                - name: proxy
+                  in: path
+              "x-amazon-apigateway-integration":
+                uri: !Sub
+                  "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SSRFunction.Arn}/invocations"
+                httpMethod: post
+                type: "aws_proxy"
+          "/":
+            get:
+              "x-amazon-apigateway-integration":
+                uri: !Sub
+                  "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SSRFunction.Arn}/invocations"
+                httpMethod: post
+                type: "aws_proxy"
+
+  WebSocketAPI:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: !Sub ${ListmanBaseName}-websocket
+      ProtocolType: WEBSOCKET
+      RouteSelectionExpression: $request.body.action
+
+  WebSocketIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref WebSocketAPI
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SSRFunction.Arn}/invocations"
+
+  WebSocketConnectRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref WebSocketAPI
+      RouteKey: $connect
+      Target: !Sub "integrations/${WebSocketIntegration}"
+
+  WebSocketDisconnectRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref WebSocketAPI
+      RouteKey: $disconnect
+      Target: !Sub "integrations/${WebSocketIntegration}"
+
+  WebSocketDefaultRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref WebSocketAPI
+      RouteKey: $default
+      Target: !Sub "integrations/${WebSocketIntegration}"
+
+  WebSocketDeployment:
+    Type: AWS::ApiGatewayV2::Deployment
+    DependsOn:
+      - WebSocketConnectRoute
+      - WebSocketDisconnectRoute
+      - WebSocketDefaultRoute
+    Properties:
+      ApiId: !Ref WebSocketAPI
+
+  WebSocketStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref WebSocketAPI
+      DeploymentId: !Ref WebSocketDeployment
+      StageName: !Ref ListmanEnv
+
+  WebSocketLambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !Ref SSRFunction
+      Principal: apigateway.amazonaws.com
+
+  ListmanDomain:
+    Type: AWS::ApiGateway::DomainName
+    Properties: 
+      DomainName: !Sub ${ListmanBaseName}.y15e.io
+      CertificateArn: arn:aws:acm:us-east-1:504289346779:certificate/4cea6741-1746-4ed7-9426-de09231c1e35
+
+  ListmanDomainMapping:
+    Type: AWS::ApiGateway::BasePathMapping
+    Properties:
+      DomainName: !Ref ListmanDomain
+      RestApiId: !Ref SSRAPI
+      Stage: !Ref ListmanEnv
+
+  ListmanDNSRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name: !Sub ${ListmanBaseName}.y15e.io
+      Type: A
+      HostedZoneName: y15e.io.
+      AliasTarget:
+        DNSName: !GetAtt ListmanDomain.DistributionDomainName
+        HostedZoneId: !GetAtt ListmanDomain.DistributionHostedZoneId
+
+# Cannot create a custom domain for websocket via cloudformation
+# https://forums.aws.amazon.com/thread.jspa?threadID=299771
+#
+#  ListmanWebSocketDomain:
+#    Type: AWS::ApiGateway::DomainName
+#    Properties: 
+#      DomainName: listman-ws.y15e.io
+#      CertificateArn: arn:aws:acm:us-east-1:504289346779:certificate/e26c3ecd-be9e-4e63-97d0-d2694bb9b7a6
+#
+#  ListmanWebSocketDomainMapping:
+#    Type: AWS::ApiGateway::BasePathMapping
+#    Properties:
+#      DomainName: !Ref ListmanWebSocketDomain
+#      RestApiId: !Ref WebSocketAPI

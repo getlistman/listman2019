@@ -1,0 +1,62 @@
+version: 0.2
+
+env:
+  variables:
+    KEY_IN_BUILDSPEC: "valueInBuildSpec"
+  parameter-store:
+    AMPLIFY_ID: /listman/AMPLIFY_ID
+    AMPLIFY_SECRET: /listman/AMPLIFY_SECRET
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 8
+    commands:
+      - printenv | sort
+      - export PATH=$PATH:/root/.local/bin
+      - pip install --upgrade pip
+      - pip install --upgrade awscli
+      - pip install --user aws-sam-cli
+  pre_build:
+    commands:
+      - npm i -g npm@latest @aws-amplify/cli
+      - echo "Installing node modules for layer..."
+      - cd dependencies/nodejs
+      - npm install
+      - cd node_modules/gaxios
+      - npm install node-fetch@2.2.0
+      - cd ../..
+      - cd ../..
+      - echo "Installing node modules for webpack..."
+      - npm install
+      - echo "Initializing amplify..."
+      - mkdir ~/.aws
+      - echo "[default]" > ~/.aws/credentials
+      - echo "aws_access_key_id=$AMPLIFY_ID" >> ~/.aws/credentials
+      - echo "aws_secret_access_key=$AMPLIFY_SECRET" >> ~/.aws/credentials
+      - echo "[default]" > ~/.aws/config
+      - echo "region=us-east-1" >> ~/.aws/config
+      - amplify init --amplify "{\"envName\":\"$LISTMAN_ENV\"}" --yes
+      - amplify env checkout $LISTMAN_ENV
+  build:
+    commands:
+      - echo "Building client/server bundles..."
+      - npx webpack --config build/webpack.client.config.js
+      - npx webpack --config build/webpack.server.config.js
+      - npx node-sass --omit-source-map-url sass/bulma.scss dist/css/bulma.css
+      - aws s3 cp dist/ s3://${LISTMAN_BASENAME}-dist/ --recursive
+      - echo "Running sam build, package and deploy..."
+      - sam build
+      - rm -rf .aws-sam/build/SSRFunction/node_modules
+  post_build:
+    commands:
+      - sam package --s3-bucket ${LISTMAN_BASENAME}-package --output-template-file output.yaml
+      - sam deploy --template-file output.yaml --stack-name $LISTMAN_BASENAME --parameter-overrides ListmanEnv=${LISTMAN_ENV} ListmanBaseName=${LISTMAN_BASENAME} --capabilities CAPABILITY_IAM
+
+#      - export BUCKET=listman-prod-artifact
+#      - aws cloudformation package --template-file template.yaml --s3-bucket $BUCKET --output-template-file outputtemplate.yaml
+#artifacts:
+#  type: zip
+#  files:
+#    - template.yaml
+#    - outputtemplate.yaml
