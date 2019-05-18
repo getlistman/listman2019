@@ -2,13 +2,13 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
 Parameters:
-  LISTMAN_ENV:
+  ListmanEnv:
     Type: String
     Default: dev
     AllowedValues:
       - prod
       - dev
-  LISTMAN_BASENAME:
+  ListmanBaseName:
     Type: String
     Default: listdev
     AllowedValues:
@@ -23,7 +23,7 @@ Resources:
       Handler: "src-server/handler.index"
       Runtime: nodejs8.10
       Timeout: 30
-      FunctionName: !Ref LISTMAN_BASENAME
+      FunctionName: !Ref ListmanBaseName
       Layers:
         - !Ref ListmanLayer
       Environment:
@@ -56,7 +56,7 @@ Resources:
   ListmanLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:
-      LayerName: ${LISTMAN_BASENAME}-layer
+      LayerName: ${ListmanBaseName}-layer
       ContentUri: dependencies/
       CompatibleRuntimes:
         - nodejs8.10
@@ -66,7 +66,7 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       Name: listman
-      StageName: !Ref LISTMAN_ENV
+      StageName: !Ref ListmanEnv
       MinimumCompressionSize: 256
       DefinitionBody:
         swagger: "2.0"
