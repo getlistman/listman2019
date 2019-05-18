@@ -65,7 +65,7 @@ Resources:
   SSRAPI:
     Type: AWS::Serverless::Api
     Properties:
-      Name: listman
+      Name: !Ref ListmanBaseName
       StageName: !Ref ListmanEnv
       MinimumCompressionSize: 256
       DefinitionBody:
@@ -77,8 +77,8 @@ Resources:
                 - name: proxy
                   in: path
               "x-amazon-apigateway-integration":
-                uri:
-                  "http://listman-dist.s3-website-us-east-1.amazonaws.com/{proxy}"
+                uri: !Sub
+                  "http://${ListmanBaseName}-dist.s3-website-us-east-1.amazonaws.com/{proxy}"
                 requestParameters:
                   "integration.request.path.proxy": "method.request.path.proxy"
                 httpMethod: get
@@ -104,7 +104,7 @@ Resources:
   WebSocketAPI:
     Type: AWS::ApiGatewayV2::Api
     Properties:
-      Name: listman-websocket
+      Name: !Sub ${ListmanBaseName}-websocket
       ProtocolType: WEBSOCKET
       RouteSelectionExpression: $request.body.action
 
@@ -150,7 +150,7 @@ Resources:
     Properties:
       ApiId: !Ref WebSocketAPI
       DeploymentId: !Ref WebSocketDeployment
-      StageName: !Sub ${ListmanEnv}
+      StageName: !Ref ListmanEnv
 
   WebSocketLambdaPermission:
     Type: AWS::Lambda::Permission
