@@ -15,5 +15,22 @@
                 "cognito": {}
             }
         }
+    },
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "listamp-dev-20190518224444-authRole",
+            "UnauthRoleArn": "arn:aws:iam::504289346779:role/listamp-dev-20190518224444-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::504289346779:role/listamp-dev-20190518224444-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "listamp-dev-20190518224444-deployment",
+            "UnauthRoleName": "listamp-dev-20190518224444-unauthRole",
+            "StackName": "listamp-dev-20190518224444",
+            "StackId": "arn:aws:cloudformation:us-east-1:504289346779:stack/listamp-dev-20190518224444/19269670-7973-11e9-80f6-1230783fe8ac"
+        },
+        "categories": {
+            "auth": {
+                "cognito": {}
+            }
+        }
     }
 }
