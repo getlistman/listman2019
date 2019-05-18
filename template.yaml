@@ -150,7 +150,7 @@ Resources:
     Properties:
       ApiId: !Ref WebSocketAPI
       DeploymentId: !Ref WebSocketDeployment
-      StageName: prod      
+      StageName: !Sub ${ListmanEnv}
 
   WebSocketLambdaPermission:
     Type: AWS::Lambda::Permission
@@ -162,7 +162,7 @@ Resources:
   ListmanDomain:
     Type: AWS::ApiGateway::DomainName
     Properties: 
-      DomainName: listman.y15e.io
+      DomainName: !Sub ${ListmanBaseName}.y15e.io
       CertificateArn: arn:aws:acm:us-east-1:504289346779:certificate/4cea6741-1746-4ed7-9426-de09231c1e35
 
   ListmanDomainMapping:
@@ -170,12 +170,12 @@ Resources:
     Properties:
       DomainName: !Ref ListmanDomain
       RestApiId: !Ref SSRAPI
-      Stage: prod
+      Stage: Sub ${ListmanEnv}
 
   ListmanDNSRecord:
     Type: AWS::Route53::RecordSet
     Properties:
-      Name: listman.y15e.io
+      Name: !Sub ${ListmanBaseName}.y15e.io
       Type: A
       HostedZoneName: y15e.io.
       AliasTarget:
