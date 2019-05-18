@@ -13,11 +13,10 @@ phases:
       nodejs: 8
     commands:
       - printenv | sort
+      - export PATH=$PATH:/root/.local/bin
       - pip install --upgrade pip
       - pip install --upgrade awscli
       - pip install --user aws-sam-cli
-      - export PATH=$PATH:/root/.local/bin
-      - sam --version
   pre_build:
     commands:
       - npm i -g npm@latest @aws-amplify/cli
@@ -39,7 +38,6 @@ phases:
       - echo "region=us-east-1" >> ~/.aws/config
       - amplify init --amplify "{\"envName\":\"$LISTMAN_ENV\"}" --yes
       - amplify env checkout $LISTMAN_ENV
-      - cat src/aws-exports.js
   build:
     commands:
       - echo "Building client/server bundles..."

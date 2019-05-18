@@ -56,7 +56,7 @@ Resources:
   ListmanLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:
-      LayerName: ${ListmanBaseName}-layer
+      LayerName: !Sub ${ListmanBaseName}-layer
       ContentUri: dependencies/
       CompatibleRuntimes:
         - nodejs8.10
