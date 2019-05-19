@@ -10,7 +10,7 @@ env:
 phases:
   install:
     runtime-versions:
-      nodejs: 8
+      nodejs: 10
     commands:
       - printenv | sort
       - export PATH=$PATH:/root/.local/bin
