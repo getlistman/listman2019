@@ -3,8 +3,6 @@ const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   
-  mode: process.env.WEBPACK_MODE,
-  
   output: {
     path: path.resolve(__dirname, '../dist/bundle'),
     publicPath: '/dist/bundle/',
