@@ -29,8 +29,8 @@ Resources:
       Environment:
         Variables:
           MONGO_URL: !Sub "{{resolve:ssm-secure:/listman/${ListmanEnv}/MONGO_URL:1}}"
-          GOOGLE_CLIENT_ID: !Sub "{{resolve:ssm:/listman/${ListmanEnv}/GOOGLE_CLIENT_ID:1}}"
-          GOOGLE_CLIENT_SECRET: !Sub "{{resolve:ssm:/listman/${ListmanEnv}/GOOGLE_CLIENT_SECRET:1}}"
+          GOOGLE_CLIENT_ID: !Sub "{{resolve:ssm-secure:/listman/${ListmanEnv}/GOOGLE_CLIENT_ID:1}}"
+          GOOGLE_CLIENT_SECRET: !Sub "{{resolve:ssm-secure:/listman/${ListmanEnv}/GOOGLE_CLIENT_SECRET:1}}"
           GOOGLE_CALLBACK_URL: !Sub "{{resolve:ssm:/listman/${ListmanEnv}/GOOGLE_CALLBACK_URL:1}}"
       Events:
         Index:
