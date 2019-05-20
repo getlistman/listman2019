@@ -6,7 +6,7 @@ env:
   parameter-store:
     AMPLIFY_ID: /listman/AMPLIFY_ID
     AMPLIFY_SECRET: /listman/AMPLIFY_SECRET
-    MONGO_URL: /listman/$LISTMAN_ENV/MONGO_URL
+    MONGO_URL: /listman/${LISTMAN_ENV}/MONGO_URL
 
 phases:
   install:

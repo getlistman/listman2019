@@ -14,6 +14,8 @@ Parameters:
     AllowedValues:
       - listman
       - listdev
+  MongoURL:
+    Type: String
 
 Resources:
 
@@ -28,7 +30,7 @@ Resources:
         - !Ref ListmanLayer
       Environment:
         Variables:
-          MONGO_URL: !Sub "{{resolve:ssm-secure:/listman/${ListmanEnv}/MONGO_URL:1}}"
+          MONGO_URL: !Ref MongoURL
           GOOGLE_CLIENT_ID: ""
           GOOGLE_CLIENT_SECRET: ""
           GOOGLE_CALLBACK_URL: ""
