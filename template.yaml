@@ -15,25 +15,25 @@ Parameters:
       - listman
       - listdev
   MongoURL:
-    Type: AWS::SSM::Parameter::Value<String>
+    Type: "AWS::SSM::Parameter::Value<String>"
     Default: "/listman/dev/MONGO_URL"
     AllowedValues:
       - "/listman/prod/MONGO_URL"
       - "/listman/dev/MONGO_URL"
   GoogleClientID:
-    Type: AWS::SSM::Parameter::Value<String>
+    Type: "AWS::SSM::Parameter::Value<String>"
     Default: "/listman/dev/GOOGLE_CLIENT_ID"
     AllowedValues:
       - "/listman/prod/GOOGLE_CLIENT_ID"
       - "/listman/dev/GOOGLE_CLIENT_ID"
   GoogleClientSecret:
-    Type: AWS::SSM::Parameter::Value<String>
+    Type: "AWS::SSM::Parameter::Value<String>"
     Default: "/listman/dev/GOOGLE_CLIENT_SECRET"
     AllowedValues:
       - "/listman/prod/GOOGLE_CLIENT_SECRET"
       - "/listman/dev/GOOGLE_CLIENT_SECRET"
   GoogleCallbackURL:
-    Type: AWS::SSM::Parameter::Value<String>
+    Type: "AWS::SSM::Parameter::Value<String>"
     Default: "/listman/dev/GOOGLE_CALLBACK_URL"
     AllowedValues:
       - "/listman/prod/GOOGLE_CALLBACK_URL"
