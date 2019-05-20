@@ -6,7 +6,6 @@ env:
   parameter-store:
     AMPLIFY_ID: /listman/AMPLIFY_ID
     AMPLIFY_SECRET: /listman/AMPLIFY_SECRET
-    MONGO_URL: /listman/${LISTMAN_ENV}/MONGO_URL
 
 phases:
   install:
@@ -53,15 +52,12 @@ phases:
     commands:
       - sam package --s3-bucket ${LISTMAN_BASENAME}-package --output-template-file output.yaml
       - |
-        sam deploy --template-file output.yaml --stack-name $LISTMAN_BASENAME \
+        sam deploy --template-file output.yaml \
+        --stack-name $LISTMAN_BASENAME \
+        --capabilities CAPABILITY_IAM \
         --parameter-overrides \
         ListmanEnv=${LISTMAN_ENV} \
-        ListmanBaseName=${LISTMAN_BASENAME} \
-        MongoURL=${MONGO_URL} \
-        GoogleClientID="/listman/${LISTMAN_ENV}/GOOGLE_CLIENT_ID" \
-        GoogleClientSecret="/listman/${LISTMAN_ENV}/GOOGLE_CLIENT_SECRET" \
-        GoogleCallbackURL="/listman/${LISTMAN_ENV}/GOOGLE_CALLBACK_URL" \
-        --capabilities CAPABILITY_IAM
+        ListmanBaseName=${LISTMAN_BASENAME}
 
 #      - export BUCKET=listman-prod-artifact
 #      - aws cloudformation package --template-file template.yaml --s3-bucket $BUCKET --output-template-file outputtemplate.yaml
