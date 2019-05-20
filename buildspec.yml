@@ -6,6 +6,7 @@ env:
   parameter-store:
     AMPLIFY_ID: /listman/AMPLIFY_ID
     AMPLIFY_SECRET: /listman/AMPLIFY_SECRET
+    MONGO_URL: /listman/$LISTMAN_ENV/MONGO_URL
 
 phases:
   install:
@@ -56,7 +57,7 @@ phases:
         --parameter-overrides \
         ListmanEnv=${LISTMAN_ENV} \
         ListmanBaseName=${LISTMAN_BASENAME} \
-        MongoURL="/listman/${LISTMAN_ENV}/MONGO_URL" \
+        MongoURL=${MONGO_URL} \
         GoogleClientID="/listman/${LISTMAN_ENV}/GOOGLE_CLIENT_ID" \
         GoogleClientSecret="/listman/${LISTMAN_ENV}/GOOGLE_CLIENT_SECRET" \
         GoogleCallbackURL="/listman/${LISTMAN_ENV}/GOOGLE_CALLBACK_URL" \
