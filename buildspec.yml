@@ -56,10 +56,10 @@ phases:
         --parameter-overrides \
         ListmanEnv=${LISTMAN_ENV} \
         ListmanBaseName=${LISTMAN_BASENAME} \
-        MongoURL=/listman/${LISTMAN_ENV}/MONGO_URL \
-        GoogleClientID=/listman/${LISTMAN_ENV}/GOOGLE_CLIENT_ID \
-        GoogleClientSecret=/listman/${LISTMAN_ENV}/GOOGLE_CLIENT_SECRET \
-        GoogleCallbackURL=/listman/${LISTMAN_ENV}/GOOGLE_CALLBACK_URL \
+        MongoURL="/listman/${LISTMAN_ENV}/MONGO_URL" \
+        GoogleClientID="/listman/${LISTMAN_ENV}/GOOGLE_CLIENT_ID" \
+        GoogleClientSecret="/listman/${LISTMAN_ENV}/GOOGLE_CLIENT_SECRET" \
+        GoogleCallbackURL="/listman/${LISTMAN_ENV}/GOOGLE_CALLBACK_URL" \
         --capabilities CAPABILITY_IAM
 
 #      - export BUCKET=listman-prod-artifact
