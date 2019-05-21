@@ -42,10 +42,10 @@
       "field": "status",
       "type": "select",
       "values": [
-        "published",
-        "unpublished",
-        "draft",
-        "trash"
+        "new",
+        "in progress",
+        "done",
+        "pending"
       ]
     }
   ],
