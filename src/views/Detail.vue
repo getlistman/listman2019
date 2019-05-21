@@ -94,7 +94,6 @@ export default {
   },
   
   beforeRouteEnter (to, from, next) {
-    console.log('Detail.vue beforeRouteEnter')
     let apiData = {
       action: 'fetchItem',
       list: to.params.list,

@@ -10,6 +10,11 @@
         {{ item[column] }}
       </router-link>
     </template>
+    <template v-else-if="column == 'url'">
+      <a :href="item.url" target="_blank">
+        {{ item[column] }}
+      </a>
+    </template>
     <template v-else>
       {{ item[column] }}
     </template>

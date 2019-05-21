@@ -200,7 +200,7 @@ const methods = {
     } else {
       // new item
       return mongo.getNextId(coll).then(r => {
-        item._id = r
+        item._id = r.toString() // todo: decide int or string
         return db.collection(coll).insertOne(item)
       })
     }

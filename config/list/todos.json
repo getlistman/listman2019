@@ -13,6 +13,16 @@
       "type": "text"
     },
     {
+      "name": "URL",
+      "field": "url",
+      "type": "text"
+    },
+    {
+      "name": "Note",
+      "field": "note",
+      "type": "text"
+    },
+    {
       "name": "Account",
       "field": "account",
       "type": "text"
@@ -55,7 +65,7 @@
       "queries": [],
       "sorting": [
         {
-          "field": "updated",
+          "field": "created",
           "order": "desc"
         },
         {
@@ -64,11 +74,11 @@
         }
       ],
       "columns": [
-        "picture",
-        "title",
-        "account",
         "status",
-        "updated"
+        "title",
+        "note",
+        "url",
+        "created"
       ],
       "drilldowns": [
         "tags"
