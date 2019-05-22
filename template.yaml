@@ -20,7 +20,7 @@ Resources:
   SSRFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: "src-server/handler.index"
+      Handler: "src-server/handlerTS.index"
       Runtime: nodejs8.10
       Timeout: 30
       FunctionName: !Ref ListmanBaseName
