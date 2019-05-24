@@ -1,9 +1,9 @@
-import { Handler, Context } from 'aws-lambda'
+import * as mongodb from 'mongodb'
 
 // https://team.goodeggs.com/export-this-interface-design-patterns-for-node-js-modules-b48a3b1f8f40
 const MongoClient = require('mongodb').MongoClient
 
-let db: Db
+let db: mongodb.Db
 
 const actions = {
   
@@ -13,10 +13,12 @@ const actions = {
       if (db) {
         resolve(db)
       } else {
-        return MongoClient.connect(url, { useNewUrlParser: true }).then(client => {
-          let dbName: string = process.env.IS_OFFLINE ? 'listman' : process.env.STAGE
-          db = client.db(dbName)
-          resolve(db)
+          return MongoClient.connect(url, { useNewUrlParser: true }).then((client: mongodb.MongoClient) => {
+              let dbName: string = process.env.IS_OFFLINE
+                  ? 'listman' : process.env.STAGE
+                  ? process.env.STAGE : ''
+              db = client.db(dbName)
+              resolve(db)
         })
       }
     })

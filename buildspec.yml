@@ -19,7 +19,7 @@ phases:
       - pip install --user aws-sam-cli
   pre_build:
     commands:
-      - npm i -g npm@latest @aws-amplify/cli
+      - npm i -g npm@latest @aws-amplify/cli typescript
       - echo "Installing node modules for layer..."
       - cd dependencies/nodejs
       - npm install
@@ -29,6 +29,7 @@ phases:
       - cd ../..
       - echo "Installing node modules for webpack..."
       - npm install
+      - tsc
       - echo "Initializing amplify..."
       - mkdir ~/.aws
       - echo "[default]" > ~/.aws/credentials
