@@ -15,7 +15,7 @@ provider:
 
 functions:
   index:
-    handler: src-server/handlerTS.index
+    handler: src-server/handler.index
     events:
       - http:
           method: GET
