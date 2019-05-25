@@ -83,6 +83,18 @@ Resources:
                   "integration.request.path.proxy": "method.request.path.proxy"
                 httpMethod: get
                 type: "http_proxy"
+          "/favicon.ico":
+            get:
+              parameters:
+                - name: proxy
+                  in: path
+              "x-amazon-apigateway-integration":
+                uri: !Sub
+                  "http://${ListmanBaseName}-dist.s3-website-us-east-1.amazonaws.com/dist/images/favicon.ico"
+                requestParameters:
+                  "integration.request.path.proxy": "method.request.path.proxy"
+                httpMethod: get
+                type: "http_proxy"
           "/{proxy+}":
             get:
               parameters:
