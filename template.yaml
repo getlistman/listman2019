@@ -90,7 +90,7 @@ Resources:
                   in: path
               "x-amazon-apigateway-integration":
                 uri: !Sub
-                  "http://${ListmanBaseName}-dist.s3-website-us-east-1.amazonaws.com/dist/images/favicon.ico"
+                  "http://${ListmanBaseName}-dist.s3-website-us-east-1.amazonaws.com/images/favicon.ico"
                 requestParameters:
                   "integration.request.path.proxy": "method.request.path.proxy"
                 httpMethod: get
