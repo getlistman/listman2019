@@ -4,7 +4,7 @@ const require_esm = require("esm")(module)
 
 const mongo = require('./mongo')
 const util = require('util')
-const ssr = require('./ssr')
+import ssr from './ssr'
 const api = require_esm('./api').default
 const websocket = require_esm('./websocket').default
 const cookie = require('cookie')
@@ -65,15 +65,19 @@ export const index: Handler = async (event: any = {}, context: Context): Promise
   
   // HTTP
   if (event.path == '/auth/google') {
+
     return google.index()
+
   } else if (event.path == '/auth/google/callback') {
+
     return google.callback(event)
+
   } else {
 
     const cookies: string = event.hasOwnProperty('headers') && event.headers.hasOwnProperty('Cookie')
           ? cookie.parse(event.headers.Cookie) : ''
     
-    const ssrBody: string = await util.promisify(ssr)(event, cookies)
+    const ssrBody: string = await ssr(event, cookies)
     
     const response: Response = {
       statusCode: 200,
