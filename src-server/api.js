@@ -1,5 +1,5 @@
 import config from '../config/server'
-import mongo from './mongo'
+import * as mongo from './mongo'
 import CustomStorage from './CustomStorage'
 
 // https://github.com/aws-amplify/amplify-js/issues/493#issuecomment-386161756

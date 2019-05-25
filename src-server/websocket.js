@@ -1,5 +1,5 @@
 import config from '../config/server'
-import mongo from './mongo'
+import * as mongo from './mongo'
 import CustomStorage from './CustomStorage'
 import cookie from 'cookie'
 import * as wsPool from './websocket-pool'
