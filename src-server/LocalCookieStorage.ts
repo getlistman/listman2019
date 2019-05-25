@@ -36,9 +36,9 @@ export default class CookieStorage {
   
   clear() {
     const cookies = Cookies.get();
-    let index: number;
-    for (index = 0; index < parseInt(cookies.length); ++index) {
-      Cookies.remove(cookies[index]);
+    let length: number = parseInt(cookies.length)
+    for (let i: number = 0; i < length; ++i) {
+      Cookies.remove(cookies[i]);
     }
     return {};
   }
