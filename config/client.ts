@@ -1,6 +1,6 @@
 const lists = require('./list')
 
-const config = {
+export default {
   
   websocket_url: {
     'localhost': 'ws://localhost:3000/api',
@@ -10,5 +10,3 @@ const config = {
   
   lists: lists
 }
-
-module.exports = config
