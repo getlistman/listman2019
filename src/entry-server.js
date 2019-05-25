@@ -1,5 +1,5 @@
 import config from '../config/server'
-import mongo from '../src-server/mongo'
+import * as mongo from '../src-server/mongo'
 import CustomStorage from '../src-server/CustomStorage'
 //import { createApp } from './app' // note: moved to inside Promise
 
