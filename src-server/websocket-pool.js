@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk'
-import mongo from './mongo'
+import * as mongo from './mongo'
 
 const sockets = [] // for offline use only
 

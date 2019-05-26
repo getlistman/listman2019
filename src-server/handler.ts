@@ -25,23 +25,11 @@ export const index: Handler = async (event: any = {}, context: Context): Promise
   
   context.callbackWaitsForEmptyEventLoop = false
   
-  console.log('[handler.js] coldStart: ' + coldStart + ' ' + event.path)
+  if (coldStart) {
+    console.log('!!! COLD START !!! ' + event.path)
+  }
   coldStart = false
 
-  // CloudWatch event (ping)
-  if (event.source == 'aws.events') {
-    console.log('aws ping return');
-    return { statusCode: 200 }
-  }
-
-  // Logging
-  /*
-  console.log('[handler.js] event')
-  console.dir(event)
-  console.log('[handler.js] context')
-  console.dir(context)
-  */
-  
   // WebSocket
   if (event.hasOwnProperty('requestContext')) {
     if (event.requestContext.eventType == 'CONNECT') {
