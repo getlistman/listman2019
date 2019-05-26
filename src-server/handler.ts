@@ -25,7 +25,7 @@ export const index: Handler = async (event: any = {}, context: Context): Promise
   
   context.callbackWaitsForEmptyEventLoop = false
   
-  console.log('[handler.js] coldStart: ' + coldStart + ' ' + event.source)
+  console.log('[handler.js] coldStart: ' + coldStart + ' ' + event.path)
   coldStart = false
 
   // CloudWatch event (ping)

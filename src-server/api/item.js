@@ -7,7 +7,7 @@ const gmail = require('./gmail')
 const hackerNews = require('./hacker-news')
 const wsPool = require('../websocket-pool')
 
-const mongo = require('../mongo')
+import * as mongo from '../mongo'
 const db = mongo.getConnection()
 
 // todo: change method name to syncItems

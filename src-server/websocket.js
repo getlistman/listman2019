@@ -42,9 +42,8 @@ async function callAPI (event) {
   } else if (event.requestContext.eventType == 'MESSAGE') {
     
     // MESSAGE
-    //console.log('MESSAGE')
-    //console.log(event)
     const parsedBody = JSON.parse(event.body)
+    console.log(parsedBody)
     const payload = parsedBody.data
     const api = require('./api/index.js')
     const result = await api[payload.action](payload)
