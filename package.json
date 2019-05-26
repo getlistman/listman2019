@@ -48,7 +48,7 @@
     "build:client": "npx webpack --config build/webpack.client.config.js --mode development",
     "build:server": "npx webpack --config build/webpack.server.config.js --mode development",
     "build:css": "node-sass --omit-source-map-url sass/bulma.scss dist/css/bulma.css",
-    "offline": "MONGO_URL=mongodb://localhost:27017/listman serverless offline start --dontPrintOutput --stage dev",
+    "offline": "MONGO_URL=mongodb://localhost:27017/listman serverless offline start --stage dev",
     "logs": "serverless logs -f websocket -t",
     "test": "jest"
   },
