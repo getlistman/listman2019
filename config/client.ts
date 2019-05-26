@@ -1,4 +1,4 @@
-const lists = require('./list')
+import { default as lists } from './list'
 
 export default {
   
