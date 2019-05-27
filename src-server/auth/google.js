@@ -37,9 +37,7 @@ module.exports.index = (event) => {
 }
 
 module.exports.callback = async (event) => {
-  
-  console.log('google.js callback')
-  
+
   const { tokens } = await oauth2Client.getToken(event.queryStringParameters.code)
   
   oauth2Client.setCredentials(tokens)
@@ -48,26 +46,15 @@ module.exports.callback = async (event) => {
     version: 'v1',
     auth: oauth2Client
   })
-  
-  console.log('google.js profile')
-  /*
-  gmail.users.getProfile({
-    auth: oauth2Client,
-    userId: 'me'
-  }, function(err, res) {
-    console.dir(err);
-    console.dir(res);
-  });
-  */
-  const profile = await util.promisify(gmail.users.getProfile)({ auth: oauth2Client, userId: 'me' })
+
+  // https://github.com/nodejs/node/issues/13338#issuecomment-307165905
+  gmail.users.getProfilePromisified = util.promisify(gmail.users.getProfile)
+  const profile = await gmail.users.getProfilePromisified({ userId: 'me' })
     
-  console.log('google.js user_id')
   const user_id = await amplifyAuth(event)
   
-  console.log('google.js db')
   const db = await mongo.connect(config.mongo_url)
   
-  console.log('google.js account')
   const apiAccount = require('../api/account')
   
   const account = {
@@ -75,7 +62,6 @@ module.exports.callback = async (event) => {
     tokens: tokens
   }
   
-  console.log('google.js addAccount')
   await apiAccount.addAccount(user_id, account)
   
   const response = {
