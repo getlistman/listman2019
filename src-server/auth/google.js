@@ -3,7 +3,7 @@
 require = require("esm")(module/*, options*/)
 
 const { google } = require('googleapis');
-const config = require('../../config/server')
+const config = require('../../config/server').default
 const util = require('util')
 const amplifyAuth = require('./amplify-auth').default
 const mongo = require('../mongo')
@@ -37,7 +37,7 @@ module.exports.index = (event) => {
 }
 
 module.exports.callback = async (event) => {
-  
+
   const { tokens } = await oauth2Client.getToken(event.queryStringParameters.code)
   
   oauth2Client.setCredentials(tokens)
@@ -46,8 +46,10 @@ module.exports.callback = async (event) => {
     version: 'v1',
     auth: oauth2Client
   })
-  
-  const profile = await util.promisify(gmail.users.getProfile)({ userId: 'me' })
+
+  // https://github.com/nodejs/node/issues/13338#issuecomment-307165905
+  gmail.users.getProfilePromisified = util.promisify(gmail.users.getProfile)
+  const profile = await gmail.users.getProfilePromisified({ userId: 'me' })
     
   const user_id = await amplifyAuth(event)
   
