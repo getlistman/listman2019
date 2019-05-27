@@ -26,7 +26,7 @@ Resources:
       FunctionName: !Ref ListmanBaseName
       VpcConfig:
         SecurityGroupIds:
-          - sg-0fef6ba52e526e891
+          - sg-0d426def225593e14
         SubnetIds:
           - subnet-03d69d72f122c72d2
       Layers:
