@@ -43,7 +43,6 @@ async function callAPI (event) {
     
     // MESSAGE
     const parsedBody = JSON.parse(event.body)
-    console.log(parsedBody)
     const payload = parsedBody.data
     const api = require('./api/index.js')
     const result = await api[payload.action](payload)
@@ -54,12 +53,6 @@ async function callAPI (event) {
     
     if (event.isOffline) {
       
-      console.log('websocket.js payload')
-      console.log(payload)
-      //console.log('websocket.js data')
-      //console.log(data)
-      
-      // offline
       return data
       
     } else {
