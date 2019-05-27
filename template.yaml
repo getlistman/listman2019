@@ -28,10 +28,7 @@ Resources:
         SecurityGroupIds:
           - sg-0fef6ba52e526e891
         SubnetIds:
-          - subnet-27691150
-          - subnet-fd7952c7
-          - subnet-a8fa65f1
-          - subnet-488d0b63
+          - subnet-03d69d72f122c72d2
       Layers:
         - !Ref ListmanLayer
       Environment:
