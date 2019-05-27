@@ -24,6 +24,14 @@ Resources:
       Runtime: nodejs8.10
       Timeout: 90
       FunctionName: !Ref ListmanBaseName
+      VpcConfig:
+        SecurityGroupIds:
+          - sg-0fef6ba52e526e891
+        SubnetIds:
+          - subnet-27691150
+          - subnet-fd7952c7
+          - subnet-a8fa65f1
+          - subnet-488d0b63
       Layers:
         - !Ref ListmanLayer
       Environment:
