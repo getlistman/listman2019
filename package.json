@@ -48,7 +48,7 @@
     "build:client": "npx webpack --config build/webpack.client.config.js --mode development",
     "build:server": "npx webpack --config build/webpack.server.config.js --mode development",
     "build:css": "node-sass --omit-source-map-url sass/bulma.scss dist/css/bulma.css",
-    "offline": "serverless offline start --stage dev",
+    "offline": "serverless offline start --stage dev --skipCacheInvalidation",
     "logs": "serverless logs -f websocket -t",
     "test": "jest"
   },

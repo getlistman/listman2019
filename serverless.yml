@@ -27,13 +27,6 @@ functions:
           method: POST
           path: /api
 
-  oauthcallback:
-    handler: src-server/auth/google.callback
-    events:
-      - http:
-          method: GET
-          path: /auth/google/callback
-
   websocket:
     handler: src-server/handler.index
     events:

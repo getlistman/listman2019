@@ -3,7 +3,7 @@
 require = require("esm")(module/*, options*/)
 
 const { google } = require('googleapis');
-const config = require('../../config/server')
+const config = require('../../config/server').default
 const util = require('util')
 const amplifyAuth = require('./amplify-auth').default
 const mongo = require('../mongo')
