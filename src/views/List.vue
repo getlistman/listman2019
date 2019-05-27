@@ -11,7 +11,7 @@
         </div>
         <div class="level-item" v-if="!checkedItems.length">
           <label class="checkbox">
-            <button @click="refreshList" class="button is-small">
+            <button @click="refreshList" class="button is-small" :class="{ 'is-loading': isSyncLoading }">
                <span class="icon is-small">
                  <i class="fa fa-sync"></i>
                </span>
@@ -130,7 +130,8 @@ export default {
     return {
       keyword: '',
       checkedItems: [],
-      checkedAll: false
+      checkedAll: false,
+      isSyncLoading: false
     }
   },
   
@@ -223,6 +224,7 @@ export default {
     },
     
     refreshList() {
+      this.isSyncLoading = true
       let apiData = {
         action: 'refreshList',
         list: this.$route.params.list,
@@ -230,13 +232,13 @@ export default {
         page: this.$route.params.page
       }
       this.$store.dispatch('callApi', apiData).then(() => {
-        
         let apiData = {
           action: 'fetchFilterTree',
           listName: this.$route.params.list,
         }
-        this.$store.dispatch('callApi', apiData)
-        
+        this.$store.dispatch('callApi', apiData).then(() => {
+          this.isSyncLoading = false
+        })
       })
     },
     
