@@ -7,6 +7,7 @@ let db: mongodb.Db
 
 // https://www.mongodb.com/blog/post/optimizing-aws-lambda-performance-with-mongodb-atlas-and-nodejs
 export function connect(url: string) {
+  console.log('mongo.ts connect: ' + url)
   return new Promise((resolve, reject) => {
     if (db) {
       resolve(db)
