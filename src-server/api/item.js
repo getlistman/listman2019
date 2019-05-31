@@ -169,6 +169,15 @@ export function fetchItems({ user_id, list, filter, filterForm, page }) {
     let cursor = db.collection(list + '.' + user_id).find(query, { projection: projection })
     
     return cursor.sort(sort).skip(skip).limit(limit).toArray().then(items => {
+
+      // convert
+      let now = moment()
+      items.map(item => {
+        let date = moment(item.date)
+        let format = (now.diff(date) < 86400000) ? 'HH:mm' : 'MMM DD'
+        item.date = date.utcOffset(9).format(format)
+      })
+
       return cursor.count().then(count => {
         
         const paging = {
