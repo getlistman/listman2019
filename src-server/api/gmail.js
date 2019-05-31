@@ -142,6 +142,7 @@ const methods = {
   
   syncItems2: (user_id, account, oauth2Client, historyId, pageToken) => {
     
+    console.log('syncItems2: ' + account.profile.emailAddress)
     return methods.historyList(oauth2Client, historyId, pageToken).then(r => {
       if (!r.data.hasOwnProperty('history')) return
       
@@ -204,6 +205,8 @@ const methods = {
   
   processHistory: (user_id, account, oauth2Client, historyItem) => {
     
+    console.log('processHistory: ' + account.profile.emailAddress)
+
     let coll = db.collection('emails.' + user_id)
     
     if (historyItem.hasOwnProperty('messagesAdded')) {

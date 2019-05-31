@@ -46,6 +46,8 @@ async function callAPI (event) {
     const payload = parsedBody.data
     const api = require('./api/index.js')
     const result = await api[payload.action](payload)
+    console.log('[websocket.js] result')
+    console.dir(result)
     const data = {
       job_id: parsedBody.job_id,
       resolve: result
@@ -67,6 +69,8 @@ async function callAPI (event) {
         endpoint: apiId + '.execute-api.' + region + '.amazonaws.com/' + stage
       })
       
+      console.log('[websocket.js] data')
+      console.dir(data)
       await wsClient.postToConnection({
         ConnectionId: event.requestContext.connectionId,
         Data: JSON.stringify(data)
