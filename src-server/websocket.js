@@ -44,6 +44,8 @@ async function callAPI (event) {
     // MESSAGE
     const parsedBody = JSON.parse(event.body)
     const payload = parsedBody.data
+    console.log('[websocket.js] payload')
+    console.dir(payload)
     const api = require('./api/index.js')
     const result = await api[payload.action](payload)
     const data = {

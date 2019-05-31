@@ -38,6 +38,7 @@ export const index: Handler = async (event: any = {}, context: Context): Promise
     } else if (event.requestContext.eventType == 'DISCONNECT') {
       return { statusCode: 200 }
     } else if (event.requestContext.eventType == 'MESSAGE') {
+      console.log(event.body)
       const wsResult = await websocket(event)
       if (event.isOffline) {
         return {

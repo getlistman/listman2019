@@ -23,6 +23,7 @@ export function refreshList({ user_id, list, filter, page }) {
   
   return apiAccount.fetchAccounts({ user_id: user_id }).then(googleAccounts => {
     
+    wsPool.send(user_id, googleAccounts.length + ' accounts')
     return Promise.all(googleAccounts.map(account => {
       return gmail.syncItems(user_id, account)
     }))
