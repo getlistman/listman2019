@@ -146,7 +146,6 @@ export default {
   },
   
   beforeRouteEnter (to, from, next) {
-    console.log('List.vue beforeRouteEnter')
     let apiData = {
       action: 'fetchItems',
       list: to.params.list,
@@ -160,7 +159,6 @@ export default {
   
   // https://router.vuejs.org/en/advanced/data-fetching.html
   beforeRouteUpdate (to, from, next) {
-    console.log('List.vue beforeRouteUpdate')
     let apiData = {
       action: 'fetchItems',
       list: to.params.list,
