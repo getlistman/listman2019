@@ -2,7 +2,7 @@ const moment = require('moment')
 const { google } = require('googleapis')
 const gmail = google.gmail({ version: 'v1' })
 
-const config = require('../../config/server')
+const config = require('../../config/server').default
 const mongo = require('../mongo')
 const db = mongo.getConnection()
 
@@ -74,6 +74,7 @@ const methods = {
       gmail.users.history.list(params, (err, response) => {
         if (err) {
           console.log('[gmail.js history list ERROR]')
+          console.dir(err)
           reject(err)
         } else {
           resolve(response)
@@ -196,7 +197,7 @@ const methods = {
       }))
       
     }).catch(e => {
-      //console.log(e)
+      console.dir(e)
       console.log('fullSyncItems: ERROR ' + account.profile.emailAddress)
     })
   },
