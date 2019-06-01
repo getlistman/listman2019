@@ -9,6 +9,7 @@
     "moment-timezone": "^0.5.25",
     "mongodb": "^3.2.6",
     "node-fetch": "2.2.0",
+    "sanitize-html": "^1.20.1",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
     "vue-server-renderer": "^2.6.10",
