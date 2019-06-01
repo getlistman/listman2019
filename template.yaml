@@ -22,7 +22,8 @@ Resources:
     Properties:
       Handler: "src-server/handler.index"
       Runtime: nodejs8.10
-      Timeout: 90
+      MemorySize: 1024
+      Timeout: 30
       FunctionName: !Ref ListmanBaseName
       VpcConfig:
         SecurityGroupIds:
