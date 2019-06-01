@@ -2,6 +2,7 @@ const moment = require('moment')
 const { google } = require('googleapis')
 const gmail = google.gmail({ version: 'v1' })
 const wsPool = require('../websocket-pool')
+const sanitizeHtml = require('sanitize-html')
 
 const config = require('../../config/server').default
 const mongo = require('../mongo')
@@ -119,6 +120,10 @@ const methods = {
         if (part.mimeType == 'text/html') {
           let decoded = Buffer.from(part.body.data, 'base64').toString('utf8')
           message.html = decoded
+          message.html = sanitizeHtml(message.html, {
+	    allowedTags: false,
+	    allowedAttributes: false
+	  })
         }
       })
     }
