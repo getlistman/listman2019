@@ -10,6 +10,13 @@ const websocket = require_esm('./websocket').default
 const cookie = require('cookie')
 const google = require('./auth/google')
 
+// https://stackoverflow.com/questions/14531232/using-winston-in-several-modules 
+const winston = require('winston')
+const logger = winston
+logger.add(new winston.transports.Console({
+  format: winston.format.simple()
+}))
+
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/e01d6e7abb2343c6b845d4945a368ed55cbf5bd2/types/aws-lambda/index.d.ts#L482
 interface Response {
   statusCode: number
@@ -26,7 +33,7 @@ export const index: Handler = async (event: any = {}, context: Context): Promise
   context.callbackWaitsForEmptyEventLoop = false
   
   if (coldStart) {
-    console.log('!!! COLD START !!! ' + event.path)
+    logger.info('!!! COLD START !!! path:' + event.path)
   }
   coldStart = false
 
@@ -38,7 +45,7 @@ export const index: Handler = async (event: any = {}, context: Context): Promise
     } else if (event.requestContext.eventType == 'DISCONNECT') {
       return { statusCode: 200 }
     } else if (event.requestContext.eventType == 'MESSAGE') {
-      console.log(event.body)
+      logger.info(event)
       const wsResult = await websocket(event)
       if (event.isOffline) {
         return {

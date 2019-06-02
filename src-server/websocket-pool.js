@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk'
 import * as mongo from './mongo'
+import logger from 'winston'
 
 const sockets = [] // for offline use only
 
@@ -34,8 +35,6 @@ async function add (user_id, event) {
 }
 
 async function send (user_id, message) {
-  
-  console.log(user_id + ' => ' + message)
   
   const data = {
     job_id: 0,
@@ -73,8 +72,7 @@ async function send (user_id, message) {
         if (err.statusCode === 410) {
           db.collection('websockets').deleteOne({ _id: doc._id })
         } else {
-          console.log('[postToConnection ERROR]')
-          console.log(err)
+          logger.err(err)
         }
       })
     })

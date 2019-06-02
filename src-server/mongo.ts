@@ -1,4 +1,5 @@
 import * as mongodb from 'mongodb'
+import logger from 'winston'
 
 // https://team.goodeggs.com/export-this-interface-design-patterns-for-node-js-modules-b48a3b1f8f40
 const MongoClient = require('mongodb').MongoClient
@@ -7,6 +8,7 @@ let db: mongodb.Db
 
 // https://www.mongodb.com/blog/post/optimizing-aws-lambda-performance-with-mongodb-atlas-and-nodejs
 export function connect(url: string) {
+  logger.info('mongo connect: ' + url)
   return new Promise((resolve, reject) => {
     if (db) {
       resolve(db)

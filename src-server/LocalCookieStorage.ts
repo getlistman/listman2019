@@ -13,7 +13,6 @@ export default class CookieStorage {
   }
 
   setItem(key: string, value: string) {
-    console.log('LocalCookie setItem ' + key)
     Cookies.set(key, value,{
       path: this.path,
       expires: this.expires,
@@ -23,7 +22,6 @@ export default class CookieStorage {
   }
 
   getItem(key: string) {
-    console.log('LocalCookie getItem ' + key)
     return Cookies.get(key);
   }
 

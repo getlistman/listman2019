@@ -3,6 +3,7 @@ import * as mongo from './mongo'
 import CustomStorage from './CustomStorage'
 import cookie from 'cookie'
 import * as wsPool from './websocket-pool'
+import logger from 'winston'
 
 // https://github.com/aws-amplify/amplify-js/issues/493#issuecomment-386161756
 import fetch from 'node-fetch'
@@ -15,7 +16,7 @@ Amplify.configure(aws_exports)
 
 async function callAPI (event) {
   
-  const db = await mongo.connect(config.mongo_url)
+  await mongo.connect(config.mongo_url)
   
   if (event.requestContext.eventType == 'CONNECT') {
     
@@ -35,17 +36,14 @@ async function callAPI (event) {
     const userInfo = await Auth.currentUserInfo()
     const user_id = parseInt(userInfo.attributes['custom:user_id'])
     
-    console.log('[websocket.js] user_id: ' + user_id)
-    
     return wsPool.add(user_id, event)
     
   } else if (event.requestContext.eventType == 'MESSAGE') {
     
     // MESSAGE
+    logger.info(event.body)
     const parsedBody = JSON.parse(event.body)
     const payload = parsedBody.data
-    console.log('[websocket.js] payload')
-    console.dir(payload)
     const api = require('./api/index.js')
     const result = await api[payload.action](payload)
     const data = {
@@ -73,8 +71,7 @@ async function callAPI (event) {
         ConnectionId: event.requestContext.connectionId,
         Data: JSON.stringify(data)
       }).promise().catch(err => {
-        console.log('[postToConnection ERROR]')
-        console.log(err)
+        logger.error(err)
       })
       
       return
