@@ -21,6 +21,7 @@ phases:
     commands:
       - npm i -g npm@latest @aws-amplify/cli typescript
       - echo "Installing node modules for layer..."
+      - node build/create-lambda-layer.js
       - cd dependencies/nodejs
       - npm install
       - cd node_modules/gaxios
