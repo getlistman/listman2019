@@ -22,7 +22,7 @@ Resources:
     Properties:
       Handler: "src-server/handler.index"
       Runtime: nodejs8.10
-      MemorySize: 1024
+      MemorySize: 512
       Timeout: 30
       FunctionName: !Ref ListmanBaseName
       VpcConfig:

@@ -21,6 +21,8 @@ phases:
     commands:
       - npm i -g npm@latest @aws-amplify/cli typescript
       - echo "Installing node modules for layer..."
+      - mkdir -p dependencies/nodejs
+      - node build/create-lambda-layer.js
       - cd dependencies/nodejs
       - npm install
       - cd node_modules/gaxios
@@ -45,7 +47,7 @@ phases:
       - npx webpack --config build/webpack.client.config.js
       - npx webpack --config build/webpack.server.config.js
       - npx node-sass --omit-source-map-url sass/bulma.scss dist/css/bulma.css
-      - aws s3 cp dist/ s3://${LISTMAN_BASENAME}-dist/ --recursive
+      - aws s3 cp dist/ s3://${LISTMAN_BASENAME}-dist/ --recursive --metadata-directive REPLACE --acl public-read --cache-control max-age=31557600
       - echo "Running sam build, package and deploy..."
       - sam build
       - rm -rf .aws-sam/build/SSRFunction/node_modules

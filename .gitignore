@@ -12,7 +12,7 @@ amplify/\#current-cloud-backend
 amplify/.config/local-*
 amplify/backend/amplify-meta.json
 amplify/backend/awscloudformation
-build/
+#build/
 #dist/
 node_modules/
 aws-exports.js
