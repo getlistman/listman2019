@@ -30,6 +30,8 @@
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "bulma": "^0.7.5",
     "chromedriver": "^74.0.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.2",
     "nightwatch": "^1.1.11",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",

@@ -23,14 +23,12 @@ function connect () {
   wsp = new WebSocketPromise(config.websocket_url[window.location.hostname])
   
   wsp.onopen = () => {
-    console.log('WebSocket open. ' + config.websocket_url[window.location.hostname])
     if (apiListener) {
       wsp.setJob(0, apiListener)
     }
   }
   
   wsp.onclose = () => {
-    console.log('WebSocket closed. ' + config.websocket_url[window.location.hostname])
     delay(5000).then(() => {
       connect()
     })

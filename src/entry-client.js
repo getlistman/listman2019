@@ -1,5 +1,5 @@
 import { createApp } from './app'
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify'
 import LocalCookieStorage from '../src-server/LocalCookieStorage'
 import aws_exports from './aws-exports'
 
