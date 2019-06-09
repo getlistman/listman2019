@@ -1,6 +1,8 @@
 {
   "short_name": "listman",
   "name": "listman",
+  "background_color": "#000",
+  "theme_color": "#000",
   "icons": [
     {
       "src": "/dist/images/icons-192.png",
