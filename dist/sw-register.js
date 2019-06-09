@@ -1,11 +1,9 @@
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('/sw.js').then(function(registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      console.log('/sw.js registered. scope: ', registration.scope);
     }, function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
+      console.log('/sw.js failed. ', err);
     });
   });
 }
@@ -17,5 +15,5 @@ window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   // Stash the event so it can be triggered later.
   deferredPrompt = e;
-  alert("beforeinstallprompt");
+  console.log("beforeinstallprompt");
 });
