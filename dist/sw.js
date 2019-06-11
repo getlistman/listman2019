@@ -2,9 +2,11 @@ var CACHE_NAME = 'listman-cache';
 var urlsToCache = [
   '/',
   '/dist/bundle/main.js',
-  '/dist/css/all.css',
   '/dist/css/bulma.css',
-  '/dist/css/fontawesome-5.9.0-all.min.css'
+  '/dist/css/fontawesome-5.9.0-all.min.css',
+  '/dist/webfonts/fa-brands-400.woff2',
+  '/dist/webfonts/fa-regular-400.woff2',
+  '/dist/webfonts/fa-solid-900.woff2'
 ];
 
 self.addEventListener('install', function(event) {
