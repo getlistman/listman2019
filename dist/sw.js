@@ -1,8 +1,13 @@
-var CACHE_NAME = 'my-site-cache-v1';
-var urlsToCache = ['/'];
+var CACHE_NAME = 'listman-cache';
+var urlsToCache = [
+  '/',
+  '/dist/bundle/main.js',
+  '/dist/css/all.css',
+  '/dist/css/bulma.css',
+  '/dist/css/fontawesome-5.9.0-all.min.css'
+];
 
 self.addEventListener('install', function(event) {
-  // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
@@ -16,7 +21,6 @@ self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request)
       .then(function(response) {
-        // Cache hit - return response
         if (response) {
           console.log('cache hit')
           return response;
