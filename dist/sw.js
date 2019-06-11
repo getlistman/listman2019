@@ -3,7 +3,8 @@ var urlsToCache = [
   '/',
   '/dist/bundle/main.js',
   '/dist/css/all.css',
-  '/dist/css/bulma.css'
+  '/dist/css/bulma.css',
+  '/dist/css/fontawesome-5.9.0-all.min.css'
 ];
 
 self.addEventListener('install', function(event) {
