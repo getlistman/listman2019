@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div>
+      {{ gqlitems }}
+    </div>
     <nav class="level is-mobile">
       <div class="level-left">
         <div class="level-item">
@@ -123,8 +126,23 @@
 
 <script>
 import FilterForm from './FilterForm.vue'
+import gql from 'graphql-tag'
 
 export default {
+  
+  apollo: {
+    gqlitems: {
+      query: gql`{hello}`,
+      subscribeToMore: {
+        document: gql`subscription name($param: String!) {
+itemAdded(param: $param) {
+id
+label
+}
+}`
+      }
+    }
+  },
   
   data () {
     return {

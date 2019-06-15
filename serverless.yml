@@ -26,6 +26,9 @@ functions:
       - http:
           method: POST
           path: /api
+      - http:
+          method: POST
+          path: /gql
 
   websocket:
     handler: src-server/handler.index
