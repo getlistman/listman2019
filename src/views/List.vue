@@ -134,11 +134,11 @@ export default {
     gqlitems: {
       query: gql`{hello}`,
       subscribeToMore: {
-        document: gql`subscription name($param: String!) {
-itemAdded(param: $param) {
-id
-label
-}
+        document: gql`subscription {
+  tagAdded {
+    id
+    label
+  }
 }`
       }
     }

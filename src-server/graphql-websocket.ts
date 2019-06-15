@@ -8,6 +8,7 @@ async function callAPI (event: any = {}) {
   console.dir(parsedBody)
   
   if (event.isOffline && parsedBody) {
+    // https://github.com/apollographql/subscriptions-transport-ws/blob/master/PROTOCOL.md
     if (parsedBody.type == 'connection_init') {
       return {
         type: "connection_ack"
@@ -18,7 +19,13 @@ async function callAPI (event: any = {}) {
         id: parsedBody.id,
         type: "data",
         payload: {
-          hello: "fooo1234"
+          data: {
+            hello: "fooo1234",
+            itemAdded: {
+              id: 9876,
+              label: "tagtag"
+            }
+          }
         }
       }
     }
@@ -26,7 +33,6 @@ async function callAPI (event: any = {}) {
   
   return ""
   
-  // https://github.com/apollographql/subscriptions-transport-ws/blob/master/PROTOCOL.md
   const subscriptionServer = SubscriptionServer.create(
     {
       execute,
