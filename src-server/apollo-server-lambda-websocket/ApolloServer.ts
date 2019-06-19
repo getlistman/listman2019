@@ -173,6 +173,8 @@ export class ApolloServer extends ApolloServerBase {
             ...this.playgroundOptions,
           };
 
+          console.log(renderPlaygroundPage(playgroundRenderPageOptions));
+          
           return callback(null, {
             body: renderPlaygroundPage(playgroundRenderPageOptions),
             statusCode: 200,

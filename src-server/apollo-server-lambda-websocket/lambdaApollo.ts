@@ -32,18 +32,21 @@ export function graphqlLambda(
   ): void => {
     context.callbackWaitsForEmptyEventLoop = false;
 
+    console.log('lambdaApollo graphqlHandler()');
+    
     if (event.httpMethod === 'POST' && !event.body) {
       return callback(null, {
         body: 'POST body missing.',
         statusCode: 500,
       });
     }
+    
     runHttpQuery([event, context], {
       method: event.httpMethod,
       options: options,
       query:
         event.httpMethod === 'POST' && event.body
-          ? JSON.parse(event.body)
+          ? JSON.parse(event.body).payload
           : event.queryStringParameters,
       request: {
         url: event.path,
@@ -52,6 +55,10 @@ export function graphqlLambda(
       },
     }).then(
       ({ graphqlResponse, responseInit }) => {
+        
+        console.log('[graphqlResponse]');
+        console.dir(graphqlResponse);
+        
         callback(null, {
           body: graphqlResponse,
           statusCode: 200,
@@ -59,6 +66,10 @@ export function graphqlLambda(
         });
       },
       (error: HttpQueryError) => {
+        
+        console.log('[error]');
+        console.dir(error);
+
         if ('HttpQueryError' !== error.name) return callback(error);
         callback(null, {
           body: error.message,
