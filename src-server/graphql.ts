@@ -14,9 +14,22 @@ const typeDefs = gql`
     type: String
   }
 
+  type TagsPage {
+    tags: [Tag]
+    hasMore: Boolean
+  }
+
   type Query {
     hello: String
+    ping(message: String!): String
     tags(type: String!): [Tag]
+    tagsPage(page: Int!, size: Int!): TagsPage
+    randomTag: Tag
+    lastTag: Tag
+  }
+
+  type Mutation {
+    addTag(type: String!, label: String!): Tag
   }
 
   type Subscription {
@@ -25,21 +38,44 @@ const typeDefs = gql`
 
   schema {
     query: Query
+    mutation: Mutation
     subscription: Subscription
   }
 `;
 
 const resolvers = {
   Query: {
-    hello: () => 'Hello world!',
+    hello(root, args, context) {
+      return "Hello world!";
+    },
+    ping(root, { message }, context) {
+      return `Answering ${message}`;
+    },
     tags(root, { type }, context) {
       return [
         {
-          "id": 1,
-          "label": 'tokyo',
-          "type": 'City'
+          id: 1,
+          label: 'foo',
+          type: 'bar'
         }
-      ];
+      ]
+    },
+    tagsPage(root, { page, size }, context) {
+      return Tags.getTagsPage(page, size);
+    },
+    randomTag(root, args, context) {
+      return Tags.getRandomTag();
+    },
+    lastTag(root, args, context) {
+      return Tags.getLastTag();
+    },
+  },
+  Mutation: {
+    addTag: async (root, { type, label }, context) => {
+      console.log(`adding ${type} tag '${label}'`);
+      const newTag = await Tags.addTag(type, label);
+      pubsub.publish(TAGS_CHANGED_TOPIC, { tagAdded: newTag });
+      return newTag;
     },
   },
   Subscription: {
