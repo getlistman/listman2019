@@ -80,13 +80,23 @@ const resolvers = {
   },
   Subscription: {
     tagAdded: {
-      subscribe: withFilter(
-        () => pubsub.asyncIterator(TAGS_CHANGED_TOPIC),
-        (payload, variables) => payload.tagAdded.type === variables.type,
-      ),
+      subscribe: () => pubsub.asyncIterator(TAGS_CHANGED_TOPIC)
     }
   },
 };
+
+let i = 1; 
+setInterval(() => {
+  console.log('timeout' + i);
+  i++;
+  pubsub.publish(TAGS_CHANGED_TOPIC, {
+    tagAdded: {
+      id: i,
+      label: 'ADDDD',
+      type: 'TTTTT'
+    }
+  })
+}, 5000);
 
 const server = new ApolloServer({
   typeDefs,
