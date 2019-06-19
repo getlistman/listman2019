@@ -1,7 +1,8 @@
 <template>
   <div>
     <div>
-      {{ gqlitems }}
+      {{ tags }}
+      <button @click="addTag">button</button>
     </div>
     <nav class="level is-mobile">
       <div class="level-left">
@@ -131,15 +132,36 @@ import gql from 'graphql-tag'
 export default {
   
   apollo: {
-    gqlitems: {
-      query: gql`{hello}`,
+    tags: {
+      query: gql`query tags($type: String!) {
+        tags(type: $type) {
+          id
+          label
+        }
+      }`,
+      variables: {
+        type: "City"
+      },
       subscribeToMore: {
-        document: gql`subscription {
-  tagAdded {
-    id
-    label
-  }
-}`
+        document: gql`subscription onTagAdded($type: String!) {
+          tagAdded(type: $type) {
+            id
+            label
+          }
+        }`,
+        variables: {
+          type: "City"
+        },
+        updateQuery: (previousResult, { subscriptionData }) => {
+          const result = {
+            tags: [
+              ...previousResult.tags,
+              subscriptionData.data.tagAdded
+            ]
+          }
+          
+          return result
+        },
       }
     }
   },
@@ -216,6 +238,21 @@ export default {
   },
   
   methods: {
+    
+    addTag() {
+      this.$apollo.mutate({
+        mutation: gql`mutation ($type: String!, $label: String!) {
+          addTag(type: $type, label: $label) {
+            id
+            label
+          }
+        }`,
+        variables: {
+          type: "City",
+          label: "Hino-shi"
+        }
+      })
+    },
     
     getFieldName(field) {
       return this.list.fields.find(f => f.field == field).name

@@ -1,4 +1,5 @@
-const { ApolloServer, gql } = require('apollo-server-lambda');
+const { ApolloServer } = require('./apollo-server-lambda-websocket');
+const { gql } = require('apollo-server-lambda');
 
 const typeDefs = gql`
   type Query {
