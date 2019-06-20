@@ -80,7 +80,10 @@ const resolvers = {
   },
   Subscription: {
     tagAdded: {
-      subscribe: () => pubsub.asyncIterator(TAGS_CHANGED_TOPIC)
+      subscribe: () => {
+        console.log('pubsub')
+        return pubsub.asyncIterator(TAGS_CHANGED_TOPIC)
+      }
     }
   },
 };
