@@ -32,8 +32,6 @@ export function graphqlLambda(
   ): void => {
     context.callbackWaitsForEmptyEventLoop = false;
 
-    console.log('lambdaApollo graphqlHandler()');
-    
     if (event.httpMethod === 'POST' && !event.body) {
       return callback(null, {
         body: 'POST body missing.',
@@ -67,8 +65,7 @@ export function graphqlLambda(
       },
       (error: HttpQueryError) => {
         
-        console.log('[error]');
-        console.dir(error);
+        console.log('[lambdaApollo error] ' + error);
 
         if ('HttpQueryError' !== error.name) return callback(error);
         callback(null, {

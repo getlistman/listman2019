@@ -134,10 +134,10 @@ export default {
   apollo: {
     tags: {
       query: gql`query tags($type: String!) {
-        tags(type: $type) {
-          id
-          label
-        }
+          tagAdded(type: $type) {
+            id
+            label
+          }
       }`,
       variables: {
         type: "City"
@@ -153,6 +153,7 @@ export default {
           type: "City"
         },
         updateQuery: (previousResult, { subscriptionData }) => {
+          console.dir(subscriptionData)
           const result = {
             tags: [
               ...previousResult.tags,

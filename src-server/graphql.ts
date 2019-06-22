@@ -6,7 +6,6 @@ import { PubSub, withFilter } from 'graphql-subscriptions';
 const pubsub = new PubSub();
 const TAGS_CHANGED_TOPIC = 'tags_changed'
 
-
 const typeDefs = gql`
   type Tag {
     id: Int
@@ -26,6 +25,7 @@ const typeDefs = gql`
     tagsPage(page: Int!, size: Int!): TagsPage
     randomTag: Tag
     lastTag: Tag
+    tagAdded(type: String!): Tag
   }
 
   type Mutation {
@@ -69,6 +69,12 @@ const resolvers = {
     lastTag(root, args, context) {
       return Tags.getLastTag();
     },
+    tagAdded(root, args, context) {
+      const result = pubsub.asyncIterator(TAGS_CHANGED_TOPIC);
+      console.log('Query tagAdded');
+      console.dir(result);
+      return result
+    }
   },
   Mutation: {
     addTag: async (root, { type, label }, context) => {
@@ -99,11 +105,19 @@ setInterval(() => {
       type: 'TTTTT'
     }
   })
-}, 5000);
+}, 10000);
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  subscriptions: '/gql'
 });
+
+// https://www.apollographql.com/docs/apollo-server/features/subscriptions/
+const http = require('http');
+const httpServer = http.createServer((req, res) => {
+  console.dir(req);
+});
+server.installSubscriptionHandlers(httpServer);
 
 exports.handler = server.createHandler();
