@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div>
+      {{ tags }}
+      <button @click="addTag">button</button>
+    </div>
     <nav class="level is-mobile">
       <div class="level-left">
         <div class="level-item">
@@ -123,8 +127,45 @@
 
 <script>
 import FilterForm from './FilterForm.vue'
+import gql from 'graphql-tag'
 
 export default {
+  
+  apollo: {
+    tags: {
+      query: gql`query tags($type: String!) {
+          tags(type: $type) {
+            id
+            label
+          }
+      }`,
+      variables: {
+        type: "City"
+      },
+      subscribeToMore: {
+        document: gql`subscription onTagAdded($type: String!) {
+          tagAdded(type: $type) {
+            id
+            label
+          }
+        }`,
+        variables: {
+          type: "City"
+        },
+        updateQuery: (previousResult, { subscriptionData }) => {
+          console.dir(subscriptionData)
+          const result = {
+            tags: [
+              ...previousResult.tags,
+              subscriptionData.data.tagAdded
+            ]
+          }
+          
+          return result
+        },
+      }
+    }
+  },
   
   data () {
     return {
@@ -198,6 +239,21 @@ export default {
   },
   
   methods: {
+    
+    addTag() {
+      this.$apollo.mutate({
+        mutation: gql`mutation ($type: String!, $label: String!) {
+          addTag(type: $type, label: $label) {
+            id
+            label
+          }
+        }`,
+        variables: {
+          type: "City",
+          label: "Hino-shi"
+        }
+      })
+    },
     
     getFieldName(field) {
       return this.list.fields.find(f => f.field == field).name

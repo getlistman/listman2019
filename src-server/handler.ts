@@ -7,6 +7,8 @@ const util = require('util')
 import ssr from './ssr'
 const api = require_esm('./api').default
 const websocket = require_esm('./websocket').default
+//const graphql_websocket = require('./graphql').handler
+const graphql_websocket = require('./graphql-websocket').default
 const cookie = require('cookie')
 const google = require('./auth/google')
 
@@ -39,6 +41,27 @@ export const index: Handler = async (event: any = {}, context: Context): Promise
 
   // WebSocket
   if (event.hasOwnProperty('requestContext')) {
+    if (event.path == '/gql') {
+      if (event.requestContext.eventType == 'CONNECT') {
+        await graphql_websocket(event, context, () => {})
+        return { statusCode: 200 }
+      } else if (event.requestContext.eventType == 'DISCONNECT') {
+        return { statusCode: 200 }
+      } else if (event.requestContext.eventType == 'MESSAGE') {
+        logger.info(event)
+        const wsResult = await graphql_websocket(event, context, () => {})
+        if (event.isOffline) {
+          return {
+            statusCode: 200,
+            headers: { "Content-Type": "text/html" },
+            body: JSON.stringify(wsResult)
+          }
+        } else {
+          return { statusCode: 200 }
+        }
+      }
+    }
+
     if (event.requestContext.eventType == 'CONNECT') {
       await websocket(event)
       return { statusCode: 200 }

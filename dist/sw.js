@@ -1,6 +1,5 @@
 var CACHE_NAME = 'listman-cache';
 var urlsToCache = [
-  '/',
   '/dist/bundle/main.js',
   '/dist/css/bulma.css',
   '/dist/css/fontawesome-5.9.0-all.min.css',
