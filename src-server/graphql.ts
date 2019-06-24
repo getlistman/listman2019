@@ -112,7 +112,7 @@ setInterval(() => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  subscriptions: '/gql'
+  //subscriptions: '/gql'
 });
 
 // https://www.apollographql.com/docs/apollo-server/features/subscriptions/
@@ -120,6 +120,6 @@ const http = require('http');
 const httpServer = http.createServer((req, res) => {
   console.dir(req);
 });
-server.installSubscriptionHandlers(httpServer);
+//server.installSubscriptionHandlers(httpServer);
 
 exports.handler = server.createHandler();
