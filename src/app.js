@@ -25,8 +25,8 @@ export function createApp () {
   if (typeof window !== 'undefined') {
     const apolloClient = new ApolloClient({
       link: new WebSocketLink({
-        uri: 'ws://localhost:3000/gql',
-        //uri: 'ws://localhost:3020/subscriptions',
+        //uri: 'ws://localhost:3000/gql',
+        uri: 'ws://localhost:3020/subscriptions',
         options: { reconnect: true }
       }),
       cache: new InMemoryCache()

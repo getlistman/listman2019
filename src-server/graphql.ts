@@ -94,6 +94,7 @@ const resolvers = {
   },
 };
 
+/*
 let i = 1; 
 setInterval(() => {
   console.log('timeout' + i);
@@ -106,6 +107,7 @@ setInterval(() => {
     }
   })
 }, 10000);
+*/
 
 const server = new ApolloServer({
   typeDefs,

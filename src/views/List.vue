@@ -134,7 +134,7 @@ export default {
   apollo: {
     tags: {
       query: gql`query tags($type: String!) {
-          tagAdded(type: $type) {
+          tags(type: $type) {
             id
             label
           }
