@@ -7,7 +7,8 @@ const util = require('util')
 import ssr from './ssr'
 const api = require_esm('./api').default
 const websocket = require_esm('./websocket').default
-const graphql_websocket = require('./graphql').handler
+//const graphql_websocket = require('./graphql').handler
+const graphql_websocket = require('./graphql-websocket').default
 const cookie = require('cookie')
 const google = require('./auth/google')
 

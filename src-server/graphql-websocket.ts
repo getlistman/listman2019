@@ -1,52 +1,47 @@
 import { SubscriptionServer, ConnectionContext } from 'subscriptions-transport-ws'
 import { execute, subscribe } from 'graphql'
 
+import AWS from 'aws-sdk'
+
 async function callAPI (event: any = {}) {
   
-  console.log('[graphql-websocket]')
-  const parsedBody = JSON.parse(event.body)
-  console.dir(parsedBody)
-  
-  if (event.isOffline && parsedBody) {
-    // https://github.com/apollographql/subscriptions-transport-ws/blob/master/PROTOCOL.md
-    if (parsedBody.type == 'connection_init') {
-      return {
-        type: "connection_ack"
-      }
-    }
-    if (parsedBody && parsedBody.type == 'start') {
-      return {
-        id: parsedBody.id,
-        type: "data",
-        payload: {
-          data: {
-            hello: "fooo1234",
-            itemAdded: {
-              id: 9876,
-              label: "tagtag"
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  return ""
-  
   const subscriptionServer = SubscriptionServer.create(
-    {
-      execute,
-      subscribe,
-      onConnect: (connectionParams: Object,
-                  webSocket: WebSocket,
-                  context: ConnectionContext) => {
-        console.log("## onConnect");
-      }
-    },
-    {
-      noServer: true
-    }
+    { execute, subscribe },
+    { noServer: true }
   )
+  
+  const res = subscriptionServer.onMessage({
+    socket: {
+      readyState: 1,
+      send: message => {
+
+        console.log('send: ' + message);
+        
+        // production
+        const apiId = event.requestContext.apiId
+        const region = process.env.AWS_REGION
+        const stage = event.requestContext.stage
+        
+        let wsClient = new AWS.ApiGatewayManagementApi({
+          apiVersion: '2018-11-29',
+          endpoint: apiId + '.execute-api.' + region + '.amazonaws.com/' + stage
+        })
+        
+        await wsClient.postToConnection({
+          ConnectionId: event.requestContext.connectionId,
+          Data: JSON.stringify(data)
+        }).promise().catch(err => {
+          logger.error(err)
+        })
+        
+        return
+      },
+    },
+    
+    initPromise: Promise.resolve(true)
+  });
+  
+  return res(event.body)
 }
 
 export default callAPI
