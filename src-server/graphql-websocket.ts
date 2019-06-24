@@ -3,17 +3,29 @@ import { execute, subscribe } from 'graphql'
 
 import AWS from 'aws-sdk'
 
+import EventEmitter from 'events'
+
 async function callAPI (event: any = {}) {
+  
+  const dummyServer = new EventEmitter()
+  
+  eventEmitter.on('message', message => {
+    console.log('emit: ' + message);
+  })
   
   const subscriptionServer = SubscriptionServer.create(
     { execute, subscribe },
-    { noServer: true }
+    { dummyServer }
   )
   
+  console.log("[subscriptionServer]")
+  console.dir(subscriptionServer)
+  
+  /*
   const res = subscriptionServer.onMessage({
     socket: {
       readyState: 1,
-      send: message => {
+      send: (message) => {
 
         console.log('send: ' + message);
         
@@ -40,8 +52,9 @@ async function callAPI (event: any = {}) {
     
     initPromise: Promise.resolve(true)
   });
+  */
   
-  return res(event.body)
+  //return res(event.body)
 }
 
 export default callAPI
