@@ -6,6 +6,7 @@ import { PubSub, withFilter } from 'graphql-subscriptions';
 const pubsub = new PubSub();
 const TAGS_CHANGED_TOPIC = 'tags_changed'
 
+/*
 const typeDefs = gql`
   type Tag {
     id: Int
@@ -93,6 +94,7 @@ const resolvers = {
     }
   },
 };
+*/
 
 /*
 let i = 1; 
@@ -109,6 +111,7 @@ setInterval(() => {
 }, 10000);
 */
 
+/*
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -123,3 +126,4 @@ const httpServer = http.createServer((req, res) => {
 //server.installSubscriptionHandlers(httpServer);
 
 exports.handler = server.createHandler();
+*/
