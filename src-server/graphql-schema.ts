@@ -1,9 +1,15 @@
 import { makeExecutableSchema } from 'graphql-tools'
 import { PubSub } from 'graphql-subscriptions'
 
+interface Tag {
+  id: number,
+  label: string,
+  type: string
+}
+
 const pubsub = new PubSub()
 const TAGS_CHANGED_TOPIC = 'tags_changed'
-const tags = []
+const tags: Tag[] = []
 
 const typeDefs = [`
   type Tag {
@@ -43,15 +49,15 @@ const typeDefs = [`
 
 const resolvers = {
   Query: {
-    hello(root, args, context) {
+    hello(root: any, args: any, context: any) {
       return "Hello world!";
     },
-    tags(root, { type }, context) {
+    tags(root: any, { type }: any, context: any) {
       return tags
     },
   },
   Mutation: {
-    addTag: async (root, { type, label }, context) => {
+    addTag: async (root: any, { type, label }: any, context: any) => {
       console.log(`adding ${type} tag '${label}'`);
       const newTag = {
         id: tags.length,
