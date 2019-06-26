@@ -1,7 +1,7 @@
 const mongo = require('../mongo')
 const db = mongo.getConnection()
 const filter = require('./filter')
-const { Auth } = require('aws-amplify')
+const Auth = require('@aws-amplify/core').default
 
 const methods = {
   

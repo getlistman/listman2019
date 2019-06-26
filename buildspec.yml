@@ -19,7 +19,7 @@ phases:
       - pip install --user aws-sam-cli
   pre_build:
     commands:
-      - npm i -g npm@latest @aws-amplify/cli@1.1.28 typescript
+      - npm i -g npm@latest @aws-amplify/cli typescript
       - echo "Installing node modules for layer..."
       - mkdir -p dependencies/nodejs
       - node build/create-lambda-layer.js

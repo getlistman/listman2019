@@ -8,7 +8,9 @@ import fetch from 'node-fetch'
 global.fetch = global.fetch || fetch
 
 /* Amplify */
-import Amplify, { Auth } from 'aws-amplify'
+//import Amplify, { Auth } from 'aws-amplify'
+import Amplify from '@aws-amplify/core'
+import Auth from '@aws-amplify/auth'
 import awsmobile from './aws-exports'
 //Amplify.configure(aws_exports)
 
