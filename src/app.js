@@ -3,6 +3,7 @@ import App from './App.vue'
 import { createRouter } from './router'
 import { createStore } from './store'
 import { sync } from 'vuex-router-sync'
+import config from '../config/client'
 
 // Apollo
 //import { SubscriptionClient } from 'subscriptions-transport-ws';
@@ -25,8 +26,7 @@ export function createApp () {
   if (typeof window !== 'undefined') {
     const apolloClient = new ApolloClient({
       link: new WebSocketLink({
-        uri: 'ws://localhost:3000/gql',
-        //uri: 'ws://localhost:3020/subscriptions',
+        uri: config.websocket_url[window.location.hostname],
         options: { reconnect: true }
       }),
       cache: new InMemoryCache()
