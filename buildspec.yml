@@ -19,7 +19,7 @@ phases:
       - pip install --user aws-sam-cli
   pre_build:
     commands:
-      - npm i -g npm@latest @aws-amplify/cli typescript
+      - npm i -g npm@latest @aws-amplify/cli@1.1.28 typescript
       - echo "Installing node modules for layer..."
       - mkdir -p dependencies/nodejs
       - node build/create-lambda-layer.js
@@ -32,7 +32,6 @@ phases:
       - echo "Installing node modules for webpack..."
       - npm install
       - tsc
-      - grep -R youtube-iframe node_modules
       - echo "Initializing amplify..."
       - mkdir ~/.aws
       - echo "[default]" > ~/.aws/credentials
