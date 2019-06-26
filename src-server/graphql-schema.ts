@@ -91,4 +91,4 @@ setInterval(() => {
     type: 'City'
   }
   pubsub.publish(TAGS_CHANGED_TOPIC, { tagAdded: newTag });
-}, 20000);
+}, 1000);
