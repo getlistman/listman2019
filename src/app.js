@@ -9,6 +9,7 @@ import config from '../config/client'
 //import { SubscriptionClient } from 'subscriptions-transport-ws';
 import ApolloClient from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+import { createHttpLink } from 'apollo-link-http'
 import { WebSocketLink } from 'apollo-link-ws'
 import VueApollo from 'vue-apollo'
 
@@ -24,6 +25,7 @@ export function createApp () {
   // Apollo
   let apolloProvider = null
   if (typeof window !== 'undefined') {
+    /*
     const apolloClient = new ApolloClient({
       link: new WebSocketLink({
         uri: config.websocket_url[window.location.hostname],
@@ -31,6 +33,15 @@ export function createApp () {
       }),
       cache: new InMemoryCache()
     })
+    */
+    const httpLink = createHttpLink({
+      uri: config.graphql_url[window.location.hostname],
+    })
+    const apolloClient = new ApolloClient({
+      link: httpLink,
+      cache: new InMemoryCache()
+    })
+    
     apolloProvider = new VueApollo({ defaultClient: apolloClient })
   }
   

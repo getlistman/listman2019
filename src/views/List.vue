@@ -1,7 +1,10 @@
 <template>
   <div>
     <div>
-      {{ tags }}
+      <div v-for="email in emails">
+        <div>Subject: {{ email.subject }}</div>
+        <div>From: {{ email.from }}</div>
+      </div>
       <button @click="addTag">button</button>
     </div>
     <nav class="level is-mobile">
@@ -132,38 +135,13 @@ import gql from 'graphql-tag'
 export default {
   
   apollo: {
-    tags: {
-      query: gql`query tags($type: String!) {
-          tags(type: $type) {
-            id
-            label
+    emails: {
+      query: gql`query emails {
+          emails {
+            subject
+            from
           }
-      }`,
-      variables: {
-        type: "City"
-      },
-      subscribeToMore: {
-        document: gql`subscription onTagAdded($type: String!) {
-          tagAdded(type: $type) {
-            id
-            label
-          }
-        }`,
-        variables: {
-          type: "City"
-        },
-        updateQuery: (previousResult, { subscriptionData }) => {
-          console.dir(subscriptionData)
-          const result = {
-            tags: [
-              ...previousResult.tags,
-              subscriptionData.data.tagAdded
-            ]
-          }
-          
-          return result
-        },
-      }
+      }`
     }
   },
   

@@ -8,5 +8,11 @@ export default {
     'listdev.y15e.io': 'wss://listdev-ws.y15e.io'
   },
   
+  graphql_url: {
+    'localhost': 'http://localhost:8080/query',
+    'listman.y15e.io': 'wss://listman-ws.y15e.io',
+    'listdev.y15e.io': 'wss://listdev-ws.y15e.io'
+  },
+
   lists: lists
 }
