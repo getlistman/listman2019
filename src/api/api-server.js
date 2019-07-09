@@ -1,5 +1,6 @@
 import api from '../../src-server/api/index.js'
-import { Auth } from 'aws-amplify'
+//import { Auth } from 'aws-amplify'
+import Auth from '@aws-amplify/auth'
 
 export default {
   async call (payload) {

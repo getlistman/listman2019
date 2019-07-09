@@ -5,7 +5,9 @@ import CustomStorage from '../CustomStorage'
 import fetch from 'node-fetch'
 global.fetch = global.fetch || fetch
 
-import Amplify, { Auth } from 'aws-amplify'
+import Amplify from '@aws-amplify/core'
+import Auth from '@aws-amplify/auth'
+//import Amplify, { Auth } from 'aws-amplify'
 import aws_exports from '../../src/aws-exports'
 Amplify.configure(aws_exports)
 
