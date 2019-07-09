@@ -133,11 +133,14 @@ export default {
   apollo: {
     items: {
       query: gql` {
-          emails {
-            subject
-            from
-			to
+          items {
+            id
 			account
+			... on Email {
+			  subject
+			  from
+			  to
+			}
           }
       }`
     }
@@ -197,9 +200,11 @@ export default {
     filter () {
       return this.list.filters.find(filter => filter.name == this.filterPath[0])
     },
+	/*
     items () {
       return this.list.items
     },
+	*/
     prevPage () {
       let page = this.$route.params.page ? parseInt(this.$route.params.page) : 1
       return '/' + this.$route.params.list + '/' + this.$route.params.filter.replace(/\//g, '%2F') + '/p' + (page - 1)
