@@ -1,10 +1,6 @@
 <template>
   <div>
     <div>
-      <div v-for="email in emails">
-        <div>Subject: {{ email.subject }}</div>
-        <div>From: {{ email.from }}</div>
-      </div>
       <button @click="addTag">button</button>
     </div>
     <nav class="level is-mobile">
@@ -135,11 +131,13 @@ import gql from 'graphql-tag'
 export default {
   
   apollo: {
-    emails: {
-      query: gql`query emails {
+    items: {
+      query: gql` {
           emails {
             subject
             from
+			to
+			account
           }
       }`
     }
